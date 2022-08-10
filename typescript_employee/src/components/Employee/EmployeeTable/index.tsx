@@ -75,8 +75,7 @@ const EmployeeTable:React.FC =()=>{
 
         const classes = useStyles();
         const [employees, setEmployees] = useState([]);
-      
-        // View Data
+     
         const getData = async ()=>{
          const response = await  fetch('http://localhost:3000',
             {   method: 'GET',    
