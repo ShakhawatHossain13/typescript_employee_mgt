@@ -1,7 +1,5 @@
 import React, {useState, useEffect } from "react" ;
-import { makeStyles} from "@material-ui/core"; 
-
-
+import { makeStyles} from "@material-ui/core";  
  
 const useStyles = makeStyles({
     table: {
@@ -78,7 +76,7 @@ const EmployeeTable:React.FC =()=>{
         const classes = useStyles();
         const [employees, setEmployees] = useState([]);
       
-
+        // View Data
         const getData = async ()=>{
          const response = await  fetch('http://localhost:3000',
             {   method: 'GET',    
@@ -88,10 +86,7 @@ const EmployeeTable:React.FC =()=>{
          }              
             )
          const result = await response.json(); 
-
-         setEmployees(result.results)
-
-        
+            setEmployees(result.results) 
         }
 
         useEffect(() => {       
@@ -100,8 +95,21 @@ const EmployeeTable:React.FC =()=>{
 
          console.log(employees);
         
-
+         const handleDelete = (e:  React.FormEvent, id:number) => {
+            onDelete(id);
+        }
       
+        const onDelete =  (id:number) => {
+            fetch(`http://localhost:3000/admin/delete-employee/${id}`, {
+                headers: {
+                    "Content-Type": "application/json"
+               },  
+              method: "DELETE",
+            })               
+              .catch((err) => {
+              console.log(err);
+              });
+          };
  
 
     return(
@@ -133,12 +141,12 @@ const EmployeeTable:React.FC =()=>{
                                 <td className={classes.table__main__tcell}>{emp.name}</td>
                                 <td className={classes.table__main__tcell}>{emp.eid}</td>
                                 <td className={classes.table__main__tcell}>{emp.email}</td>
-                                <td className={classes.table__main__tcell}>{emp.phone}</td>     
+                                <td className={classes.table__main__tcell}>{emp.tel}</td>     
                                 <td className={classes.table__main__taction}>
                                     <button className={classes.table__main__btn} type='submit'  >
                                             EDIT
                                     </button>
-                                    <button className={classes.table__main__btn} type='submit'  >
+                                    <button className={classes.table__main__btn} type='submit' onClick={(e)=>handleDelete(e, emp.id)}  >
                                             DELETE
                                     </button>
                                 </td>   
