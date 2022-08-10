@@ -121,7 +121,9 @@ const AddEmployee:React.FC =()=>{
             skills:skills
           }),
            
-        })
+        }).catch((err) => {
+            console.log(err);
+            });
            
       };
 
