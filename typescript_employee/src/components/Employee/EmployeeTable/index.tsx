@@ -112,13 +112,9 @@ const EmployeeTable:React.FC =()=>{
               });
           };
  
-        let filteredEmployee;
-          
+        let filteredEmployee;          
         filteredEmployee = employees.filter((asd:any) =>
         asd.name.toString().toLowerCase().includes(query) );
-
-        console.log(filteredEmployee);
- 
           const eventOnChange = (q:any) =>{
             setQuery(q);    
           } 
