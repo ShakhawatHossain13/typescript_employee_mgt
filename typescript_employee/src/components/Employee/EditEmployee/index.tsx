@@ -2,11 +2,6 @@ import React, { FormEvent, useState } from "react" ;
 import { makeStyles} from "@material-ui/core"; 
 import { useParams,useLocation, useNavigate } from "react-router-dom"; 
 
-type EditEmployeeProps ={
-    id: number,
-     
-}
-
 const useStyles = makeStyles({
     form: {
         width: "50%",
