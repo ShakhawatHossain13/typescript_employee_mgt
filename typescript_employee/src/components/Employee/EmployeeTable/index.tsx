@@ -137,7 +137,7 @@ const EmployeeTable:React.FC =()=>{
                             <th className={classes.table__main__theadaction}>Action</th>                      
                         </tr>
   
-                        {filteredEmployee.map((emp: any)=>(                        
+                        {filteredEmployee?.map((emp: any)=>(                        
                          
                             <tr> 
                                 <td className={classes.table__main__tcell}>  <input type='checkbox' name="check"/></td>
@@ -165,6 +165,7 @@ const EmployeeTable:React.FC =()=>{
                          
                         ))} 
                     </table> 
+                   {!filteredEmployee?.length && <h1>No Data Found!</h1>}
             </div>
             
         </React.Fragment>
