@@ -1,4 +1,5 @@
-import React, {useState, useEffect } from "react" ;
+import React, {useState, useEffect, useCallback  } from "react" ;
+import { Link } from "react-router-dom"; 
 import { makeStyles} from "@material-ui/core";  
  
 const useStyles = makeStyles({
@@ -71,11 +72,15 @@ const useStyles = makeStyles({
   );
  
 
-const EmployeeTable:React.FC =()=>{    
 
+
+
+  
+const EmployeeTable:React.FC =()=>{    
         const classes = useStyles();
-        const [employees, setEmployees] = useState([]);
-     
+        const [employees, setEmployees] = useState([]); 
+        const [query, setQuery] = useState(''); 
+
         const getData = async ()=>{
          const response = await  fetch('http://localhost:3000',
             {   method: 'GET',    
@@ -91,8 +96,6 @@ const EmployeeTable:React.FC =()=>{
         useEffect(() => {       
            getData();
          },[]);
-
-         console.log(employees);
         
          const handleDelete = (e:  React.FormEvent, id:number) => {
             onDelete(id);
@@ -110,13 +113,16 @@ const EmployeeTable:React.FC =()=>{
               });
           };
  
-
+ 
+          const eventOnChange = (q:any) =>{
+            setQuery(q);    
+          } 
     return(
         <React.Fragment>
             <div className={classes.table}>
                 <h1 className={classes.table__title}>Employee List</h1>
                 <div className="table__search"  >
-                    <input className={classes.table__search} type="text" placeholder="Search..." />
+                    <input className={classes.table__search} type="text" placeholder="Search..." onChange={(e)=> eventOnChange(e.target.value)} />
 
                 </div>
 
@@ -131,8 +137,7 @@ const EmployeeTable:React.FC =()=>{
                             <th className={classes.table__main__thead}>Phone</th>     
                             <th className={classes.table__main__theadaction}>Action</th>                      
                         </tr>
- 
-
+  
                         {employees.map((emp: any)=>(                        
                          
                             <tr> 
@@ -142,28 +147,29 @@ const EmployeeTable:React.FC =()=>{
                                 <td className={classes.table__main__tcell}>{emp.email}</td>
                                 <td className={classes.table__main__tcell}>{emp.tel}</td>     
                                 <td className={classes.table__main__taction}>
+                                <Link  
+                                    to={{
+                                      pathname: `/edit-employee/${emp?.id}`,
+                                      search: `choosenEmployee=${JSON.stringify( {...emp})}`  
+                                    }
+                                    }                                  
+                                    >
                                     <button className={classes.table__main__btn} type='submit'  >
                                             EDIT
                                     </button>
+                                    </Link>
                                     <button className={classes.table__main__btn} type='submit' onClick={(e)=>handleDelete(e, emp.id)}  >
                                             DELETE
                                     </button>
                                 </td>   
                             </tr>
                          
-                        ))}
-                             
-                       
-                    </table>
-
+                        ))} 
+                    </table> 
             </div>
-           
-           
+            
         </React.Fragment>
     )
 }
-
-
-
  
 export default EmployeeTable;
