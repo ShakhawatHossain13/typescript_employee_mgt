@@ -1,14 +1,8 @@
 import React, { FormEvent, useState } from "react" ;
 import { makeStyles} from "@material-ui/core"; 
-import { employee } from "../../../model"; 
-import { createModuleBlock } from "typescript";
-
-
-type AddEmployeeProps ={
-    
-    
-}
-
+import { employee } from "../../../model";  
+import { useNavigate } from "react-router-dom"; 
+ 
 const useStyles = makeStyles({
     form: {
         width: "50%",
@@ -78,7 +72,7 @@ const AddEmployee:React.FC =()=>{
     }
 
     const [employee, setEmployee] = useState(inital);
-            
+    const navigate = useNavigate();            
     
       const  handleAdd=(e:FormEvent<HTMLFormElement>)=>{        
         e.preventDefault();     
@@ -100,7 +94,6 @@ const AddEmployee:React.FC =()=>{
             position:position.value, 
             skills:skills.value})
            ); 
-        
           
         onAdd(name.value, email.value, tel.value, eid.value, position.value, skills.value);
       } 
@@ -109,9 +102,13 @@ const AddEmployee:React.FC =()=>{
 
       const onAdd =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
  
+ 
        await  fetch("http://localhost:3000/admin/add-employee", {
             
           method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+       }, 
           body: JSON.stringify({
             name:name,
             email:email,
@@ -121,36 +118,15 @@ const AddEmployee:React.FC =()=>{
             skills:skills
           }),
            
+        }).then((res) => res.json())
+        .then((data) => {
+            if(data.success) navigate('/'); 
+            
         }).catch((err) => {
             console.log(err);
             });
-           
       };
-
-
-     
-     
-
-    //   const handleInput = (e:React.FormEvent) =>{
-    //     const {name, email, tel, eid, position, skills} = e.target as typeof e.target & {
-    //         name : {value: string}
-    //         email: {value: string}
-    //         tel: {value: string}
-    //         eid: {value: string}
-    //         position: {value: string}
-    //         skills: {value: string}
-    //     }  
-     
-    //     setEmployee((prev)=>( 
-    //         {...prev,
-    //         name:name.value, 
-    //         email:email.value, 
-    //         tel:tel.value, 
-    //         eid:eid.value, 
-    //         position:position.value, 
-    //         skills:skills.value})
-    //        );
-    //   }
+    
 
 const classes = useStyles();
     return(
