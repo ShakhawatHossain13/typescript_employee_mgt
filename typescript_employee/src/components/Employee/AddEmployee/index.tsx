@@ -1,12 +1,9 @@
 import React, { FormEvent, useState } from "react" ;
 import { makeStyles} from "@material-ui/core"; 
-import { useParams,useLocation, useNavigate } from "react-router-dom"; 
+import { employee } from "../../../model";  
+import { useNavigate } from "react-router-dom"; 
 
-type EditEmployeeProps ={
-    id: number,
-     
-}
-
+ 
 const useStyles = makeStyles({
     form: {
         width: "50%",
@@ -65,28 +62,20 @@ const useStyles = makeStyles({
   );
  
 
-const EditEmployee:React.FC  =(props)=>{
-    const { id } = useParams(); 
-    const navigate = useNavigate();
+const AddEmployee:React.FC =()=>{
+    const inital = {  
+        name: "",
+        email: "",
+        tel: "",
+        eid: "",     
+        position: "",
+        skills: "",
+    }
 
-    let data:any = "";
-    const search = useLocation().search;
-    data = new URLSearchParams(search).get('choosenEmployee');
-    const emp = JSON.parse(data);
-
-     
-
-    const [employee, setEmployee] =  useState({  
-        name: emp.name,
-        email: emp.email,
-        tel: emp.tel,
-        eid: emp.eid,     
-        position: emp.position,
-        skills: emp.namskillse,
-    })
-  
+    const [employee, setEmployee] = useState(inital);
+    const navigate = useNavigate();            
     
-      const  handleEdit=(e:FormEvent<HTMLFormElement>)=>{        
+      const  handleAdd=(e:FormEvent<HTMLFormElement>)=>{        
         e.preventDefault();     
         const {name, email, tel, eid, position, skills} = e.target as typeof e.target & {
             name : {value: string}
@@ -96,76 +85,93 @@ const EditEmployee:React.FC  =(props)=>{
             position: {value: string}
             skills: {value: string}
         }  
-         
-        onEdit(name.value, email.value, tel.value, eid.value, position.value, skills.value);
+     
+        setEmployee((prev)=>( 
+            {...prev,
+            name:name.value, 
+            email:email.value, 
+            tel:tel.value, 
+            eid:eid.value, 
+            position:position.value, 
+            skills:skills.value})
+           ); 
+          
+        onAdd(name.value, email.value, tel.value, eid.value, position.value, skills.value);
       } 
+
+      console.log(employee.name, employee.email,employee.tel, employee.eid);
+
+      const onAdd =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
  
-      const onEdit =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
  
- 
-        await  fetch(`http://localhost:3000/admin/edit-employee/${id}`, {             
-           method: "PUT",
-           headers: {
-             "Content-Type": "application/json"
-        }, 
-           body: JSON.stringify({
-             name:name,
-             email:email,
-             tel:tel,
-             eid:eid,
-             position:position,
-             skills:skills
-           }),
-         }).then((res) => res.json())
-         .then((data) => {              
-             if(data.success)  navigate(-1);      
-         }).catch((err) => {
-             console.log(err);
-        });
-       };
+       await  fetch("http://localhost:3000/admin/add-employee", {
+            
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+       }, 
+          body: JSON.stringify({
+            name:name,
+            email:email,
+            tel:tel,
+            eid:eid,
+            position:position,
+            skills:skills
+          }),
+           
+        }).then((res) => res.json())
+        .then((data) => {
+            if(data.success) navigate('/'); 
+            
+        }).catch((err) => {
+            console.log(err);
+            });
+      };
+    
 
 const classes = useStyles();
     return(
         <React.Fragment>         
             <div className={classes.form}>
-                <h1 className={classes.form__title}>Edit Record</h1>       
+                <h1 className={classes.form__title}>Add Record</h1>       
                 <button className={classes.form__wrapper__main__btn}    >
-                    Back
+                            Back
                 </button>
-                <form className="form__wrapper" onSubmit={(e)=>handleEdit(e)}>      
+                <form className="form__wrapper" onSubmit={(e)=>handleAdd(e)}>      
                     <div className={classes.form__wrapper__main}>            
                         <div className={classes.form__wrapper__main__half}>
                             <input className={classes.form__wrapper__main__half__input} type="text" id="name" name="name" placeholder="Full Name" 
-                              onChange={(e:any)=> setEmployee(e.target.value)}
-                              value={employee.name}                           
+                        //    onChange={handleInput}
+                            // value={employee.name}
+                           
                             />
                             <p id="errorname" className={classes.form__wrapper__main__half__msg}></p>
                         </div>
                         <div className={classes.form__wrapper__main__half}>            
                             <input className={classes.form__wrapper__main__half__input} type="email" id="email" name="email" placeholder="Email" 
-                           value={employee.email}
-                           onChange={(e:any)=> setEmployee(e.target.value)}
+                            // value={employee.email}
+                            //   onChange={handleInput}
                               />
                             <p  id="erroremail" className={classes.form__wrapper__main__half__msg}></p>
                         </div>
                         <div className={classes.form__wrapper__main__half}>
                             <input className={classes.form__wrapper__main__half__input} type="tel" id="tel" name="tel" placeholder="Phone Number"
-                           value={employee.tel}
-                           onChange={(e:any)=> setEmployee(e.target.value)}
+                            // value={employee.tel}
+                            // onChange={handleInput}
                             />
                             <p  id="errortel" className={classes.form__wrapper__main__half__msg}></p>
                         </div>
                         <div className={classes.form__wrapper__main__half}>
                             <input className={classes.form__wrapper__main__half__input}type="text" id="eid" name="eid" placeholder="Employee ID"
-                               value={employee.eid}
-                               onChange={(e:any)=> setEmployee(e.target.value)}
+                            //  value={employee.eid}
+                            // onChange={handleInput}
                             />
                             <p  id="erroreid" className={classes.form__wrapper__main__half__msg}></p>
                         </div>
                         <div className={classes.form__wrapper__main__half}>
                             <input className={classes.form__wrapper__main__half__input} type="text" id="position" name="position" placeholder="Position" 
-                            value={employee.position}
-                            onChange={(e:any)=> setEmployee(e.target.value)}
+                            // value={employee.position}
+                            //  onChange={handleInput}
                             />
                             <p  id="errorposition"  className={classes.form__wrapper__main__half__msg}></p>
                         </div>                       
@@ -175,11 +181,11 @@ const classes = useStyles();
                              onChange={handleInput}
                             /> */}
                             <select  className={classes.form__wrapper__main__half__input__select} id="skills" name="skills" 
-                                     value={employee.skills}
-                                     onChange={(e:any)=> setEmployee(e.target.value)}
+                                    //  value={employee.skills}
+                                    // onChange={handleInput}
                                     >
 
-                                        <option value={employee.skills} selected> {employee.skills} </option>
+                                        <option value="React">--- Selcet Skill ---</option>
                                         <option value="React">React</option>
                                         <option value="Node JS">Node JS</option>
                                         <option value="Mongo DB">MongoDB</option>
@@ -197,7 +203,49 @@ const classes = useStyles();
     )
 }
 
-export default EditEmployee;
+export default AddEmployee;
 
 
- 
+
+
+// const emailPattern:any = /^\S+@\S+$/i;
+// const telPattern:any = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
+// const name:string = (document.getElementById('name') as HTMLInputElement).value;
+// const email:string = (document.getElementById('email') as HTMLInputElement).value;
+// const tel:string = (document.getElementById('tel') as HTMLInputElement).value;
+// const eid:string = (document.getElementById('eid') as HTMLInputElement).value;
+
+// if(name === ""){
+//     (document.getElementById('errorname') as HTMLParagraphElement).innerHTML = "Please Input Full Name";
+//     return false;
+// }else{
+//     (document.getElementById('errorname') as HTMLParagraphElement).innerHTML = "";
+// }
+
+// if(email === ""){
+//     (document.getElementById('erroremail') as HTMLParagraphElement).innerHTML = "Please provide email address";
+//     return false;
+// }else if(!email.match(emailPattern)){
+//     (document.getElementById('erroremail') as HTMLParagraphElement).innerHTML = "Please valid email address";
+//     return false;
+// }else{
+//     (document.getElementById('erroremail') as HTMLParagraphElement).innerHTML = "";
+// }
+
+// if(tel === ""){
+//     (document.getElementById('errortel') as HTMLParagraphElement).innerHTML = "Please provide phone number";
+//     return false;
+// }else if(!tel.match(telPattern)){
+//     (document.getElementById('errortel') as HTMLParagraphElement).innerHTML = "Provide a valid phone number";
+//     return false;
+// }
+// else{
+//     (document.getElementById('errortel') as HTMLParagraphElement).innerHTML = "";
+// }
+
+// if(eid === ""){
+//     (document.getElementById('erroreid') as HTMLParagraphElement).innerHTML = "Please provide EID";
+//     return false;
+// }else{
+//     (document.getElementById('erroreid') as HTMLParagraphElement).innerHTML = "";
+// }
