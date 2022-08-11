@@ -10,7 +10,6 @@ const App: React.FC=()=> {
   return (  
     <React.Fragment>
       <Nav/>
-       
       <Routes>
           <Route path="/" element={<EmployeeTable />} />
           <Route path="/add" element={<AddEmployee />} />  
