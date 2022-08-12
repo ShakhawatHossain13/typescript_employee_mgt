@@ -73,6 +73,7 @@ const useStyles = makeStyles({
   );
 
   type formDataType = {    
+    id:number;
     name: string,
     email: string,
     tel: string,
@@ -82,6 +83,7 @@ const useStyles = makeStyles({
   };
   
 type EmployeeTableProps ={}
+
 const EmployeeTable:React.FC<EmployeeTableProps> =()=>{    
         const classes = useStyles();
         const [employees, setEmployees] = useState<formDataType[]>([]); 
@@ -104,7 +106,8 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
          }
          const handleDelete = (e:  React.FormEvent, id:number) => {
             onDelete(id);
-        } 
+        }
+ 
       /** 
         Method to delete employee info through delete API
       */      
@@ -152,9 +155,9 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
                             <th className={classes.table__main__theadaction}>Action</th>                      
                         </tr>
   
-                        {filteredEmployee?.map((emp:any )=>(                        
+                        {filteredEmployee?.map((emp:formDataType)=>(                        
                             <tr key={emp.id}> 
-                                <td className={classes.table__main__tcell}>  <input type='checkbox' value={emp.id}  name="check"  checked={emp.isChecked} onChange={(e)=>handleCheckbox(e)}/></td>
+                                <td className={classes.table__main__tcell}>  <input type='checkbox' value={emp.id}  name="check"  onChange={(e)=>handleCheckbox(e)}/></td>
                                 <td className={classes.table__main__tcell}>{emp.name}</td>
                                 <td className={classes.table__main__tcell}>{emp.eid}</td>
                                 <td className={classes.table__main__tcell}>{emp.email}</td>
