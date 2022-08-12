@@ -29,14 +29,12 @@ const useStyles = makeStyles({
     },
     table__main__taction:{
         textAlign: 'center',
-        backgroundColor:"#f0f0f0",
-      
+        backgroundColor:"#f0f0f0",      
     },
     table__main__theadaction:{
         textAlign: 'center',
         padding: '8px',
-        backgroundColor:"#f0f0f0",
-        
+        backgroundColor:"#f0f0f0",        
     },
     table__main__btn:{
         width: '70px',
@@ -47,11 +45,9 @@ const useStyles = makeStyles({
         color: '#fff',
         fontSize: '14px',
         borderRadius: '5px',
-
      },
      table__main__thead__checkbox:{
         textAlign: "center",
-
      },
      table__search:{
         "&:focus": {
@@ -65,8 +61,7 @@ const useStyles = makeStyles({
         margin: '20px',
         marginLeft:'2px',
         border: '1px solid cadetblue',  
-        borderRadius: '5px',
-        
+        borderRadius: '5px',        
      },
   }
   );
@@ -87,8 +82,7 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
         const classes = useStyles();
         const [employees, setEmployees] = useState<formDataType[]>([]); 
         const [query, setQuery] = useState<string>(''); 
-        const [isChecked, setIsChecked] = useState([]);
-
+        
         const getData = async ()=>{
          const response = await  fetch('http://localhost:3000',
             {   method: 'GET',    
@@ -103,7 +97,7 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
          const handleCheckbox =(e:React.ChangeEvent<HTMLInputElement>)=>{
             const {value, checked} = e.target; 
          }
-         const handleDelete = (e:  React.FormEvent, id:number) => {
+         const handleDelete = (e: React.FormEvent, id:number) => {
             onDelete(id);
         }
  
@@ -126,14 +120,13 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
             getData();
           },[employees]);
  
-        let filteredEmployee;
-          
-        filteredEmployee = employees.filter((asd) =>
-        asd.name.toString().toLowerCase().includes(query) );
- 
-          const eventOnChange = (q:string) =>{
-            setQuery(q);    
+        let filteredEmployee;          
+        filteredEmployee = employees.filter((empl) =>
+        empl.name.toLowerCase().includes(query) ); 
+          const eventOnChange = (searchTerm:string) =>{
+            setQuery(searchTerm);    
           } 
+
     return(
         <React.Fragment>
             <div className={classes.table}>
