@@ -123,16 +123,17 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
         let filteredEmployee;          
         filteredEmployee = employees.filter((empl) =>
         empl.name.toLowerCase().includes(query) ); 
-          const eventOnChange = (searchTerm:string) =>{
+
+        const handleSearch = (searchTerm:string) =>{
             setQuery(searchTerm);    
-          } 
+        } 
 
     return(
         <React.Fragment>
             <div className={classes.table}>
                 <h1 className={classes.table__title}>Employee List</h1>
                 <div className="table__search"  >
-                    <input className={classes.table__search} type="text" placeholder="Search..." onChange={(e)=> eventOnChange(e.target.value)} />
+                    <input className={classes.table__search} type="text" placeholder="Search..." onChange={(e)=> handleSearch(e.target.value)} />
                 </div>
                     <table className={classes.table__main}>
                         <tbody>
