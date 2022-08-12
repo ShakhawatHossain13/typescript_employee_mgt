@@ -60,6 +60,7 @@ const useStyles = makeStyles({
     },
   }
   ); 
+
   type formDataType = {    
     name: string,
     email: string,
@@ -91,15 +92,18 @@ const useStyles = makeStyles({
     skills: "",
   };
   
-
 type AddEmployeeProps ={};
-
 const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{    
 
     const [employee, setEmployee] = React.useState<formDataType>(formData);
     const [error, setError] = React.useState(initialError); 
     const phoneRegex = "^[0-9-]+$|^$";
     const emailRegex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const skill = [
+      { value: 'React'},
+      { value: 'Node JS'},
+      { value: 'Mongo DB'},
+      { value: 'AWS'}, ];
 
     const navigate = useNavigate();    
     
@@ -287,14 +291,7 @@ const classes = useStyles();
         </React.Fragment>
     )
 }
-
-const skill = [
-    { value: 'React'},
-    { value: 'Node JS'},
-    { value: 'Mongo DB'},
-    { value: 'AWS'}, ];
-
-
+ 
 export default AddEmployee;
 
  
