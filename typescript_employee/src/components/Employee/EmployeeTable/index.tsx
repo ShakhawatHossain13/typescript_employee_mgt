@@ -98,14 +98,9 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
          }              
             )
          const result = await response.json(); 
-            setEmployees(result.results)    
-             
+            setEmployees(result.results)   
         }
-
-        useEffect(() => {       
-           getData();
-         },[employees]);
-        
+ 
          const handleCheckbox =(e:React.ChangeEvent<HTMLInputElement>)=>{
             const {value, checked} = e.target; 
          }
@@ -115,7 +110,7 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
         }
  
       /** 
-       @onDelete Method to delete employee info through delete API
+        Method to delete employee info through delete API
       */      
         const onDelete =  (id:number) => {
             fetch(`http://localhost:3000/admin/delete-employee/${id}`, {
@@ -128,13 +123,17 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
                 console.log(err);
               });
           };
+
+          useEffect(() => {       
+            getData();
+          },[employees]);
  
         let filteredEmployee;
           
-        filteredEmployee = employees.filter((asd:any) =>
+        filteredEmployee = employees.filter((asd) =>
         asd.name.toString().toLowerCase().includes(query) );
  
-          const eventOnChange = (q:any) =>{
+          const eventOnChange = (q:string) =>{
             setQuery(q);    
           } 
     return(
