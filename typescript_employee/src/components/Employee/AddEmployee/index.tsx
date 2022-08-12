@@ -105,7 +105,7 @@ const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{
       { value: 'Mongo DB'},
       { value: 'AWS'}, ];
 
-    const navigate = useNavigate();    
+    const navigate = useNavigate();   
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;    
@@ -140,7 +140,6 @@ const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{
             copyErrors[key] = ``;
           }
         }
-    
         setError(copyErrors);    
         return hasError;
       };
@@ -150,20 +149,10 @@ const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{
 
         if (isValid()) {
             return;
-          }
-
-        const {name, email, tel, eid, position, skills} = e.target as typeof e.target & {
-            name : {value: string}
-            email: {value: string}
-            tel: {value: string}
-            eid: {value: string}
-            position: {value: string}
-            skills: {value: string}
-        }       
-              
+          }              
         try {
             console.log("Employee: ", employee);
-            onAdd(name.value, email.value, tel.value, eid.value, position.value, skills.value);
+            onAdd();
           } catch (error) {
             console.log(error);
           }       
@@ -172,7 +161,7 @@ const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{
       /** 
        Method to Add employee info through create API
       */
-      const onAdd =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
+      const onAdd =  async () => {
  
        await fetch("http://localhost:3000/admin/add-employee", {            
           method: "POST",
@@ -180,12 +169,12 @@ const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{
             "Content-Type": "application/json"
        }, 
           body: JSON.stringify({
-            name:name,
-            email:email,
-            tel:tel,
-            eid:eid,
-            position:position,
-            skills:skills
+            name:employee.name,
+            email:employee.email,
+            tel:employee.tel,
+            eid:employee.eid,
+            position:employee.position,
+            skills:employee.skills
           }),
            
         }).then((res) => res.json())
@@ -292,6 +281,7 @@ const classes = useStyles();
     )
 }
  
+
 export default AddEmployee;
 
  
