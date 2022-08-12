@@ -92,11 +92,15 @@ const useStyles = makeStyles({
   };
   
 
-const AddEmployee:React.FC=(props)=>{    
+type AddEmployeeProps ={};
+
+const AddEmployee:React.FC<AddEmployeeProps>=(props)=>{    
+
     const [employee, setEmployee] = React.useState<formDataType>(formData);
     const [error, setError] = React.useState(initialError); 
     const phoneRegex = "^[0-9-]+$|^$";
     const emailRegex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     const navigate = useNavigate();    
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +119,7 @@ const AddEmployee:React.FC=(props)=>{
       };
 
       /** 
-       @isValid Method for validating fields
+        Method for validating fields
       */
       const isValid = () => {
         let hasError = false;
@@ -162,7 +166,7 @@ const AddEmployee:React.FC=(props)=>{
       } 
   
       /** 
-       @onAdd Method to Add employee info through create API
+       Method to Add employee info through create API
       */
       const onAdd =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
  
@@ -189,6 +193,7 @@ const AddEmployee:React.FC=(props)=>{
             });
       };
     
+
 const classes = useStyles();
     return(
         <React.Fragment>         
@@ -288,6 +293,7 @@ const skill = [
     { value: 'Node JS'},
     { value: 'Mongo DB'},
     { value: 'AWS'}, ];
+
 
 export default AddEmployee;
 
