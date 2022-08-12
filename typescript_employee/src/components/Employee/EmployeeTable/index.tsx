@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from "react" ;
 import { Link } from "react-router-dom"; 
 import { makeStyles} from "@material-ui/core";  
+import { type } from "@testing-library/user-event/dist/type";
  
 const useStyles = makeStyles({
     table: {
@@ -70,12 +71,23 @@ const useStyles = makeStyles({
      },
   }
   );
+
+  type formDataType = {    
+    name: string,
+    email: string,
+    tel: string,
+    eid: string,     
+    position: string,
+    skills: string,
+  };
   
-  
-const EmployeeTable:React.FC =()=>{    
+type EmployeeTableProps ={}
+
+const EmployeeTable:React.FC<EmployeeTableProps> =()=>{    
         const classes = useStyles();
-        const [employees, setEmployees] = useState([]); 
-        const [query, setQuery] = useState(''); 
+        const [employees, setEmployees] = useState<formDataType[]>([]); 
+        const [query, setQuery] = useState<string>(''); 
+        const [isChecked, setIsChecked] = useState([]);
 
         const getData = async ()=>{
          const response = await  fetch('http://localhost:3000',
@@ -86,13 +98,18 @@ const EmployeeTable:React.FC =()=>{
          }              
             )
          const result = await response.json(); 
-            setEmployees(result.results) 
+            setEmployees(result.results)    
+             
         }
 
         useEffect(() => {       
            getData();
-         },[]);
+         },[employees]);
         
+         const handleCheckbox =(e:React.ChangeEvent<HTMLInputElement>)=>{
+            const {value, checked} = e.target; 
+         }
+
          const handleDelete = (e:  React.FormEvent, id:number) => {
             onDelete(id);
         }
@@ -108,13 +125,15 @@ const EmployeeTable:React.FC =()=>{
               method: "DELETE",
             })               
               .catch((err) => {
-              console.log(err);
+                console.log(err);
               });
           };
  
-        let filteredEmployee;          
+        let filteredEmployee;
+          
         filteredEmployee = employees.filter((asd:any) =>
         asd.name.toString().toLowerCase().includes(query) );
+ 
           const eventOnChange = (q:any) =>{
             setQuery(q);    
           } 
@@ -126,6 +145,7 @@ const EmployeeTable:React.FC =()=>{
                     <input className={classes.table__search} type="text" placeholder="Search..." onChange={(e)=> eventOnChange(e.target.value)} />
                 </div>
                     <table className={classes.table__main}>
+                        <tbody>
                         <tr>
                             <th className={classes.table__main__thead}>
                                 <input id="select__all" className={classes.table__main__thead__checkbox} type='checkbox'/>
@@ -138,9 +158,8 @@ const EmployeeTable:React.FC =()=>{
                         </tr>
   
                         {filteredEmployee?.map((emp: any)=>(                        
-                         
-                            <tr> 
-                                <td className={classes.table__main__tcell}>  <input type='checkbox' name="check"/></td>
+                            <tr key={emp.id}> 
+                                <td className={classes.table__main__tcell}>  <input type='checkbox' value={emp.id}  name="check"  checked={emp.isChecked} onChange={(e)=>handleCheckbox(e)}/></td>
                                 <td className={classes.table__main__tcell}>{emp.name}</td>
                                 <td className={classes.table__main__tcell}>{emp.eid}</td>
                                 <td className={classes.table__main__tcell}>{emp.email}</td>
@@ -163,9 +182,10 @@ const EmployeeTable:React.FC =()=>{
                                 </td>   
                             </tr>
                          
-                        ))} 
+                        ))}   
+                        </tbody>                     
                     </table> 
-                   {!filteredEmployee?.length && <h1>No Data Found!</h1>}
+                    {!filteredEmployee?.length && <h1>No Data Found!</h1>}
             </div>
             
         </React.Fragment>
