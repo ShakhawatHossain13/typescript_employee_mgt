@@ -144,8 +144,7 @@ const EditEmployee:React.FC<EditEmployeeProps> =(props)=>{
           } else {
             copyErrors[key] = ``;
           }
-        }
-    
+        }    
         setError(copyErrors);    
         return hasError;
       };
@@ -156,19 +155,10 @@ const EditEmployee:React.FC<EditEmployeeProps> =(props)=>{
         if (isValid()) {
             return;
           }
-
-        const {name, email, tel, eid, position, skills} = e.target as typeof e.target & {
-            name : {value: string}
-            email: {value: string}
-            tel: {value: string}
-            eid: {value: string}
-            position: {value: string}
-            skills: {value: string}
-        }  
-              
+ 
         try {
             console.log("Employee: ", employee);
-            onEdit(name.value, email.value, tel.value, eid.value, position.value, skills.value);
+            onEdit();
           } catch (error) {
             console.log(error);
           }
@@ -177,7 +167,7 @@ const EditEmployee:React.FC<EditEmployeeProps> =(props)=>{
       /** 
         Method to Edit employee info through Update API
       */
-      const onEdit =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
+      const onEdit =  async () => {
  
         await  fetch(`http://localhost:3000/admin/edit-employee/${id}`, {             
             method: "PUT",
@@ -185,12 +175,12 @@ const EditEmployee:React.FC<EditEmployeeProps> =(props)=>{
               "Content-Type": "application/json"
          }, 
             body: JSON.stringify({
-              name:name,
-              email:email,
-              tel:tel,
-              eid:eid,
-              position:position,
-              skills:skills
+              name:employee.name,
+              email:employee.email,
+              tel:employee.tel,
+              eid:employee.eid,
+              position:employee.position,
+              skills:employee.skills
             }),
           }).then((res) => res.json())
           .then((data) => {              
@@ -295,11 +285,5 @@ const classes = useStyles();
         </React.Fragment>
     )
 }
- 
+
 export default EditEmployee;
-
- 
-
-
-
- 
