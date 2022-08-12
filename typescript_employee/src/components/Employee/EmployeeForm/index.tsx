@@ -86,7 +86,7 @@ const useStyles = makeStyles({
   type EmployeeFormProps ={};
 
 const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{     
-    let data:any = "";
+    let data : any = "" ;
     const search = useLocation().search;
     data = new URLSearchParams(search).get('choosenEmployee');
     const emp = JSON.parse(data); 
@@ -100,20 +100,21 @@ const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{
         skills: "",
     };
   
+    const { id } = useParams(); 
+    const navigate = useNavigate();
     const [employee, setEmployee] = React.useState<formDataType>(formData);
-    const [isEdit, setIsEdit] = React.useState<boolean>(false);
+    const [edit, setEdit] = React.useState<boolean>(false);
+    const [error, setError] = React.useState<ErrorType>(initialError);     
 
-    const [error, setError] = React.useState(initialError); 
     const phoneRegex = "^[0-9-]+$|^$";
     const emailRegex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const { id } = useParams();  
+    
     const skill = [
       { value: 'React'},
       { value: 'Node JS'},
       { value: 'Mongo DB'},
       { value: 'AWS'}, ];
-
-    const navigate = useNavigate();    
+        
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;    
         setEmployee((prev) => {
@@ -156,13 +157,12 @@ const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{
             return;
           }
         try {         
-          if(isEdit){
+          if(edit){
              onEdit();
           } else
           {
             onAdd(employee);
-          }
-           
+          }           
           } catch (error) {
             console.log(error);
           }
@@ -239,9 +239,8 @@ const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{
   React.useEffect(() => {
     if (id) {
       fetchDetails();
-      setIsEdit(true);
+      setEdit(true);
     }
-
   }, [id]);
 
 const classes = useStyles();
@@ -328,7 +327,7 @@ const classes = useStyles();
                                         {...params} label="Select skill"  />}
                                     />
     
-                            </div>   
+                             </div>   
                             </div>         
                         <button className={classes.form__wrapper__main__btn} type='submit'  >
                             Submit
@@ -339,12 +338,5 @@ const classes = useStyles();
     )
 }
 
-
-
 export default EmployeeForm;
 
- 
-
-
-
- 
