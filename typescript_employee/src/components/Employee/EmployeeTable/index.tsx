@@ -1,7 +1,6 @@
 import React, {useState, useEffect } from "react" ;
 import { Link } from "react-router-dom"; 
-import { makeStyles} from "@material-ui/core";  
-import { type } from "@testing-library/user-event/dist/type";
+import { makeStyles} from "@material-ui/core";   
  
 const useStyles = makeStyles({
     table: {
