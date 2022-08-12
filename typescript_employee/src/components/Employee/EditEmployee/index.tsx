@@ -82,15 +82,15 @@ const useStyles = makeStyles({
     position: "",
     skills: "",
   };
-  
-const EditEmployee:React.FC =(props)=>{    
 
+  type EditEmployeeProps ={};
+
+const EditEmployee:React.FC<EditEmployeeProps> =(props)=>{     
     let data:any = "";
     const search = useLocation().search;
     data = new URLSearchParams(search).get('choosenEmployee');
     const emp = JSON.parse(data); 
-  
-    
+   
     const formData: formDataType = {
         name: emp.name,
         email: emp.email,
@@ -105,6 +105,11 @@ const EditEmployee:React.FC =(props)=>{
     const phoneRegex = "^[0-9-]+$|^$";
     const emailRegex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { id } = useParams();  
+    const skill = [
+      { value: 'React'},
+      { value: 'Node JS'},
+      { value: 'Mongo DB'},
+      { value: 'AWS'}, ];
 
     const navigate = useNavigate();    
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,7 +128,7 @@ const EditEmployee:React.FC =(props)=>{
       };
 
       /** 
-       @isValid Method for validating fields
+        Method for validating fields
       */
       const isValid = () => {
         let hasError = false;
@@ -170,7 +175,7 @@ const EditEmployee:React.FC =(props)=>{
       } 
 
       /** 
-       @onAdd Method to Edit employee info through Update API
+        Method to Edit employee info through Update API
       */
       const onEdit =  async (name:string, email:string, tel:string, eid:string, position:string, skills:string ) => {
  
@@ -219,10 +224,10 @@ const classes = useStyles();
                                 value={employee.email}
                                 helperText={error.email}                                                        
                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                    if (event.target.value.match(emailRegex)) {
-                                      handleChange(event);
-                                    }
-                                  }}                            
+                                  if (event.target.value.match(emailRegex)) {
+                                   return handleChange(event);
+                                  }
+                                }}                            
                                 error={Boolean(error.email)}
                               />
                         </div>
@@ -232,7 +237,7 @@ const classes = useStyles();
                                 helperText={error.tel}                                                        
                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                     if (event.target.value.match(phoneRegex)) {
-                                      handleChange(event);
+                                     return handleChange(event);
                                     }
                                   }}                 
                                 error={Boolean(error.tel)}
@@ -258,6 +263,9 @@ const classes = useStyles();
                             <Autocomplete                                               
                                     options={skill}
                                     className={classes.form__wrapper__main__half__input__select}
+                                    defaultValue={
+                                      skill.find((ele) => ele.value === employee.skills) || null
+                                    }
                                     onChange={(e, value: any) => {
                                       setEmployee((prev:any) => {
                                           return {
@@ -266,6 +274,7 @@ const classes = useStyles();
                                           };
                                         });
                                       }}
+                                      
                                     getOptionLabel={(option:any) => option.value}                               
                                     renderInput={(params:any) => 
                                     <TextField                              
@@ -286,13 +295,7 @@ const classes = useStyles();
         </React.Fragment>
     )
 }
-
-const skill = [
-    { value: 'React'},
-    { value: 'Node JS'},
-    { value: 'Mongo DB'},
-    { value: 'AWS'}, ];
-
+ 
 export default EditEmployee;
 
  
