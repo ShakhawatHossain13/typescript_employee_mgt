@@ -1,66 +1,77 @@
-import React, { FormEvent} from "react" ;
+import React, {useState, useEffect } from "react" ;
+import { Link } from "react-router-dom"; 
 import { makeStyles} from "@material-ui/core";  
-import { TextField } from "@material-ui/core"; 
-import Autocomplete from '@material-ui/lab/Autocomplete'; 
-import { useParams,useLocation, useNavigate } from "react-router-dom"; 
+import { type } from "@testing-library/user-event/dist/type";
  
 const useStyles = makeStyles({
-    form: {
-        width: "50%",
-        margin: "0 auto",
-        boxSizing: "border-box",    
-        '@media screen and (max-width: 480px)' : {
-            width: '90%'
-          }     
+    table: {
+        width: "80%",
+        margin: "50px auto",
+        boxSizing: "border-box",               
     },
-    form__title:{
+    table__title:{
+        textAlign:'center',
+        color: "cadetblue",
+    },
+    table__main: {
+        width: "100%",
+        textAlign:"left",
+        border:"1px solid #f0f0f0",
+    },
+    table__main__thead:{
         textAlign: 'center',
-        marginTop:"50px",
-        color: 'cadetblue',
+        padding: '8px',
+        backgroundColor:"#f0f0f0",
     },
-
-    form__wrapper__main: { 
-      border: '1px solid cadetblue',
-      padding: '30px',
-      display: 'grid',
-      gap: '0 15px',   
-      paddingBottom: '30px',
-      gridTemplateColumns: '1fr 1fr',
-      '@media screen and (max-width: 480px)' : {
-        gridTemplateColumns: '1fr',
-      }  
+    table__main__tcell:{
+        textAlign: 'center',
+        padding: '8px',
+        backgroundColor:"#f0f0f0",
     },
-    form__wrapper__main__half:{
-        height:'60px',
+    table__main__taction:{
+        textAlign: 'center',
+        backgroundColor:"#f0f0f0",
+      
     },
-    form__wrapper__main__half__input:{
-      width: '95%',
-      padding: '16px 5px', 
-      fontSize: '14px',
+    table__main__theadaction:{
+        textAlign: 'center',
+        padding: '8px',
+        backgroundColor:"#f0f0f0",
+        
     },
-    form__wrapper__main__half__input__select:{
-        width: '97%',
-        padding: '0px', 
-        fontSize: '14px',
-    },
-    form__wrapper__main__half__msg:{
-        fontSize: '12px',
-        margin: '5px 0',
-        color: 'blue'
-    },
-    form__wrapper__main__btn:{
+    table__main__btn:{
         width: '70px',
         height:'35px',
         backgroundColor: 'cadetblue',
-        margin: '20px 0',
+        margin: '10px',
         border: '0',
         color: '#fff',
         fontSize: '14px',
         borderRadius: '5px',
-    },
+
+     },
+     table__main__thead__checkbox:{
+        textAlign: "center",
+
+     },
+     table__search:{
+        "&:focus": {
+            border: '1px solid cadetblue', 
+          },
+        width: '300px',
+        padding: '8px 10px', 
+        fontSize: '14px',
+        textAlign: 'left',
+        float:'left',     
+        margin: '20px',
+        marginLeft:'2px',
+        border: '1px solid cadetblue',  
+        borderRadius: '5px',
+        
+     },
   }
-  ); 
- 
+  );
+
   type formDataType = {    
     name: string,
     email: string,
@@ -69,227 +80,111 @@ const useStyles = makeStyles({
     position: string,
     skills: string,
   };
-
-  type ErrorType = {
-    [key: string]: string;
-  };
   
-  const initialError: ErrorType = {
-    name: "",
-    email: "",
-    tel: "",
-    eid: "",     
-    position: "",
-    skills: "",
-  };
+type EmployeeTableProps ={}
+const EmployeeTable:React.FC<EmployeeTableProps> =()=>{    
+        const classes = useStyles();
+        const [employees, setEmployees] = useState<formDataType[]>([]); 
+        const [query, setQuery] = useState<string>(''); 
+        const [isChecked, setIsChecked] = useState([]);
 
-  type EditEmployeeProps ={};
-
-const EditEmployee:React.FC<EditEmployeeProps> =(props)=>{     
-    let data:any = "";
-    const search = useLocation().search;
-    data = new URLSearchParams(search).get('choosenEmployee');
-    const emp = JSON.parse(data); 
-   
-    const formData: formDataType = {
-        name: emp.name,
-        email: emp.email,
-        tel: emp.tel,
-        eid: emp.eid,     
-        position: emp.position,
-        skills: emp.skills,
-    };
-  
-    const [employee, setEmployee] = React.useState<formDataType>(formData);
-    const [error, setError] = React.useState(initialError); 
-    const phoneRegex = "^[0-9-]+$|^$";
-    const emailRegex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const { id } = useParams();  
-    const skill = [
-      { value: 'React'},
-      { value: 'Node JS'},
-      { value: 'Mongo DB'},
-      { value: 'AWS'}, ];
-
-    const navigate = useNavigate();    
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;    
-        setEmployee((prev) => {
-          return {
-            ...prev,
-            [name]: value,
+        const getData = async ()=>{
+         const response = await  fetch('http://localhost:3000',
+            {   method: 'GET',    
+                headers: {
+                     "Content-Type": "application/json"
+                },   
+         }              
+            )
+         const result = await response.json(); 
+            setEmployees(result.results)   
+        } 
+         const handleCheckbox =(e:React.ChangeEvent<HTMLInputElement>)=>{
+            const {value, checked} = e.target; 
+         }
+         const handleDelete = (e:  React.FormEvent, id:number) => {
+            onDelete(id);
+        } 
+      /** 
+        Method to delete employee info through delete API
+      */      
+        const onDelete =  (id:number) => {
+            fetch(`http://localhost:3000/admin/delete-employee/${id}`, {
+                headers: {
+                    "Content-Type": "application/json"
+               },  
+              method: "DELETE",
+            })               
+              .catch((err) => {
+                console.log(err);
+              });
           };
-        });
-    
-        setError((prev) => ({
-          ...prev,
-          [name]: "",
-        }));
-      };
 
-      /** 
-        Method for validating fields
-      */
-      const isValid = () => {
-        let hasError = false;
-        const copyErrors: ErrorType = { ...error };    
-        const validationFields = ["name", "email", "tel", "eid", "position" ];    
-        for (let key in copyErrors) {
-          if (
-            validationFields.includes(key) &&
-            employee[key as keyof typeof employee] === ""
-          ) {
-            copyErrors[key] = "required";
-            hasError = true;
-          } else {
-            copyErrors[key] = ``;
-          }
-        }    
-        setError(copyErrors);    
-        return hasError;
-      };
-
-      const  handleEdit=(e:FormEvent<HTMLFormElement>)=>{        
-        e.preventDefault();      
-
-        if (isValid()) {
-            return;
-          }
+          useEffect(() => {       
+            getData();
+          },[employees]);
  
-        try {
-            console.log("Employee: ", employee);
-            onEdit();
-          } catch (error) {
-            console.log(error);
-          }
-      } 
-
-      /** 
-        Method to Edit employee info through Update API
-      */
-      const onEdit =  async () => {
+        let filteredEmployee;
+          
+        filteredEmployee = employees.filter((asd) =>
+        asd.name.toString().toLowerCase().includes(query) );
  
-        await  fetch(`http://localhost:3000/admin/edit-employee/${id}`, {             
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json"
-         }, 
-            body: JSON.stringify({
-              name:employee.name,
-              email:employee.email,
-              tel:employee.tel,
-              eid:employee.eid,
-              position:employee.position,
-              skills:employee.skills
-            }),
-          }).then((res) => res.json())
-          .then((data) => {              
-              if(data.success)  navigate(-1);      
-          }).catch((err) => {
-              console.log(err);
-         });
-      };
-    
-
-const classes = useStyles();
+          const eventOnChange = (q:string) =>{
+            setQuery(q);    
+          } 
     return(
-        <React.Fragment>         
-            <div className={classes.form}>
-                <h1 className={classes.form__title}>Edit Record</h1>       
-                <button className={classes.form__wrapper__main__btn}  >
-                            Back
-                </button>
-                <form className="form__wrapper" onSubmit={(e)=>handleEdit(e)}>      
-                    <div className={classes.form__wrapper__main}>            
-                        <div className={classes.form__wrapper__main__half}>
-                            <TextField className={classes.form__wrapper__main__half__input} type="text" id="name" name="name" placeholder="Full Name"              
-                                value={employee.name}
-                                helperText={error.name}                                                        
-                                onChange={handleChange}                             
-                                error={Boolean(error.name)}
-                            />
-                        </div>
-                        <div className={classes.form__wrapper__main__half}>            
-                            <TextField className={classes.form__wrapper__main__half__input} type="email" id="email" name="email" placeholder="Email"                              
-                                value={employee.email}
-                                helperText={error.email}                                                        
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                  if (event.target.value.match(emailRegex)) {
-                                   return handleChange(event);
-                                  }
-                                }}                            
-                                error={Boolean(error.email)}
-                              />
-                        </div>
-                        <div className={classes.form__wrapper__main__half}>
-                            <TextField className={classes.form__wrapper__main__half__input} type="tel" id="tel" name="tel" placeholder="Phone Number"                             
-                                value={employee.tel}
-                                helperText={error.tel}                                                        
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                    if (event.target.value.match(phoneRegex)) {
-                                     return handleChange(event);
+        <React.Fragment>
+            <div className={classes.table}>
+                <h1 className={classes.table__title}>Employee List</h1>
+                <div className="table__search"  >
+                    <input className={classes.table__search} type="text" placeholder="Search..." onChange={(e)=> eventOnChange(e.target.value)} />
+                </div>
+                    <table className={classes.table__main}>
+                        <tbody>
+                        <tr>
+                            <th className={classes.table__main__thead}>
+                                <input id="select__all" className={classes.table__main__thead__checkbox} type='checkbox'/>
+                            </th>
+                            <th className={classes.table__main__thead}>Name</th>
+                            <th className={classes.table__main__thead}>ID</th>
+                            <th className={classes.table__main__thead}>Email</th>
+                            <th className={classes.table__main__thead}>Phone</th>     
+                            <th className={classes.table__main__theadaction}>Action</th>                      
+                        </tr>
+  
+                        {filteredEmployee?.map((emp:any )=>(                        
+                            <tr key={emp.id}> 
+                                <td className={classes.table__main__tcell}>  <input type='checkbox' value={emp.id}  name="check"  checked={emp.isChecked} onChange={(e)=>handleCheckbox(e)}/></td>
+                                <td className={classes.table__main__tcell}>{emp.name}</td>
+                                <td className={classes.table__main__tcell}>{emp.eid}</td>
+                                <td className={classes.table__main__tcell}>{emp.email}</td>
+                                <td className={classes.table__main__tcell}>{emp.tel}</td>     
+                                <td className={classes.table__main__taction}>
+                                <Link  
+                                    to={{
+                                      pathname: `/edit-employee/${emp?.id}`,
+                                      search: `choosenEmployee=${JSON.stringify( {...emp})}`  
                                     }
-                                  }}                 
-                                error={Boolean(error.tel)}
-                            />
-                        </div>
-                        <div className={classes.form__wrapper__main__half}>
-                            <TextField className={classes.form__wrapper__main__half__input}type="text" id="eid" name="eid" placeholder="Employee ID"                               
-                                value={employee.eid}
-                                helperText={error.eid}                                                        
-                                onChange={handleChange}                             
-                                error={Boolean(error.eid)}
-                            />
-                        </div>
-                        <div className={classes.form__wrapper__main__half}>
-                            <TextField className={classes.form__wrapper__main__half__input} type="text" id="position" name="position" placeholder="Position"                            
-                                value={employee.position}
-                                helperText={error.position}                                                        
-                                onChange={handleChange}                             
-                                error={Boolean(error.position)}
-                        />
-                        </div>                      
-                        <div>         
-                            <Autocomplete                                               
-                                    options={skill}
-                                    className={classes.form__wrapper__main__half__input__select}
-                                    defaultValue={
-                                      skill.find((ele) => ele.value === employee.skills) || null
-                                    }
-                                    onChange={(e, value: any) => {
-                                      setEmployee((prev:any) => {
-                                          return {
-                                            ...prev,
-                                            skill: value?.value,
-                                          };
-                                        });
-                                      }}
-                                      
-                                    getOptionLabel={(option:any) => option.value}                               
-                                    renderInput={(params:any) => 
-                                    <TextField                              
-                                        value={employee.skills}
-                                        helperText={error.skills}                                                                       
-                                        error={Boolean(error.skills)}
-                                        name="skills"                                                               
-                                        {...params} label="Select skill"  />}
-                                    />
-    
-                            </div>   
-                            </div>         
-                        <button className={classes.form__wrapper__main__btn} type='submit'  >
-                            Submit
-                        </button>
-                </form>               
-            </div>           
+                                    }                                  
+                                    >
+                                    <button className={classes.table__main__btn} type='submit'  >
+                                            EDIT
+                                    </button>
+                                    </Link>
+                                    <button className={classes.table__main__btn} type='submit' onClick={(e)=>handleDelete(e, emp.id)}  >
+                                            DELETE
+                                    </button>
+                                </td>   
+                            </tr>
+                         
+                        ))}   
+                        </tbody>                     
+                    </table> 
+                    {!filteredEmployee?.length && <h1>No Data Found!</h1>}
+            </div>
+            
         </React.Fragment>
     )
 }
  
-export default EditEmployee;
-
- 
-
-
-
- 
+export default EmployeeTable;
