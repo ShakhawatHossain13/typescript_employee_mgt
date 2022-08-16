@@ -2,7 +2,7 @@ import React, { FormEvent} from "react" ;
 import { makeStyles} from "@material-ui/core";  
 import { TextField } from "@material-ui/core"; 
 import Autocomplete from '@material-ui/lab/Autocomplete'; 
-import { useParams,useLocation, useNavigate } from "react-router-dom"; 
+import { useParams,useLocation, useNavigate, Link } from "react-router-dom"; 
  
 const useStyles = makeStyles({
     form: {
@@ -43,6 +43,11 @@ const useStyles = makeStyles({
         padding: '0px', 
         fontSize: '14px',
     },
+    form__wrapper__main__half__msg:{
+        fontSize: '12px',
+        margin: '5px 0',
+        color: 'blue'
+    },
     form__wrapper__main__btn:{
         width: '70px',
         height:'35px',
@@ -78,14 +83,13 @@ const useStyles = makeStyles({
     skills: "",
   };
 
-  type EmployeeFormProps ={};
+type EmployeeFormProps ={};
 
-const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{     
-    let data : any = "" ;
+const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{        
     const search = useLocation().search;
-    data = new URLSearchParams(search).get('choosenEmployee');
-    const emp = JSON.parse(data); 
-   
+    const  data = new URLSearchParams(search).get('choosenEmployee');
+    const emp = JSON.parse(data ?? "");  
+    
     const formData: formDataType = {
         name: "",
         email: "",
