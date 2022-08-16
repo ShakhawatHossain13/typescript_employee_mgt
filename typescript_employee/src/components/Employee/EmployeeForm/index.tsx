@@ -168,8 +168,8 @@ const EmployeeForm:React.FC<EmployeeFormProps> =(props)=>{
           }
       } 
 
-     /** 
-       Method to Add employee info through create API
+      /** 
+        Method to Add employee info through create API
       */
        const onAdd =  async (employee: formDataType) => {
  
@@ -306,9 +306,9 @@ const classes = useStyles();
                                     options={skill}
                                     className={classes.form__wrapper__main__half__input__select}
                                     defaultValue={
-                                      skill.find((ele) => ele.value === emp?.skills) || null
+                                      skill.find((item) => item.value === emp?.skills) || null
                                     }
-                                    onChange={(e, value: any) => {
+                                    onChange={(e, value) => {
                                       setEmployee((prev:any) => {
                                           return {
                                             ...prev,
@@ -317,8 +317,8 @@ const classes = useStyles();
                                         });
                                       }}
                                       
-                                    getOptionLabel={(option:any) => option.value}                               
-                                    renderInput={(params:any) => 
+                                    getOptionLabel={(option) => option?.value}                               
+                                    renderInput={(params) => 
                                     <TextField                              
                                         value={employee.skills}
                                         helperText={error.skills}                                                                       
@@ -339,4 +339,3 @@ const classes = useStyles();
 }
 
 export default EmployeeForm;
-
