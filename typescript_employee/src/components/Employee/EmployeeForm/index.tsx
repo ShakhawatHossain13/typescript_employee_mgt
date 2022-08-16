@@ -18,7 +18,6 @@ const useStyles = makeStyles({
         marginTop:"50px",
         color: 'cadetblue',
     },
-
     form__wrapper__main: { 
       border: '1px solid cadetblue',
       padding: '30px',
