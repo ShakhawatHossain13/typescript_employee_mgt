@@ -82,6 +82,7 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
         const classes = useStyles();
         const [employees, setEmployees] = useState<formDataType[]>([]); 
         const [query, setQuery] = useState<string>(''); 
+        const [check, setCheck] = useState<boolean>();
         
         const getData = async ()=>{
          const response = await  fetch('http://localhost:3000',
@@ -116,6 +117,15 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
               });
           };
 
+          const handleCheck=(e: React.MouseEvent<HTMLInputElement>)=>{
+            if(!check){
+                setCheck(true);
+            }
+            else{
+                setCheck(false);
+            }
+          }
+
           useEffect(() => {       
             getData();
           },[employees]);
@@ -139,7 +149,7 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
                         <tbody>
                         <tr>
                             <th className={classes.table__main__thead}>
-                                <input id="select__all" className={classes.table__main__thead__checkbox} type='checkbox'/>
+                                <input id="select__all" className={classes.table__main__thead__checkbox} type='checkbox' onClick={(e)=>handleCheck(e)}/>
                             </th>
                             <th className={classes.table__main__thead}>Name</th>
                             <th className={classes.table__main__thead}>ID</th>
@@ -150,7 +160,7 @@ const EmployeeTable:React.FC<EmployeeTableProps> =()=>{
   
                         {filteredEmployee?.map((emp:formDataType)=>(                        
                             <tr key={emp?.id}> 
-                                <td className={classes.table__main__tcell}>  <input type='checkbox' value={emp?.id}  name="check"  onChange={(e)=>handleCheckbox(e)}/></td>
+                                <td className={classes.table__main__tcell}>  <input type='checkbox' value={emp?.id}  name="check" id="check" checked={check} /></td>
                                 <td className={classes.table__main__tcell}>{emp?.name}</td>
                                 <td className={classes.table__main__tcell}>{emp?.eid}</td>
                                 <td className={classes.table__main__tcell}>{emp?.email}</td>
