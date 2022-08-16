@@ -43,11 +43,6 @@ const useStyles = makeStyles({
         padding: '0px', 
         fontSize: '14px',
     },
-    form__wrapper__main__half__msg:{
-        fontSize: '12px',
-        margin: '5px 0',
-        color: 'blue'
-    },
     form__wrapper__main__btn:{
         width: '70px',
         height:'35px',
