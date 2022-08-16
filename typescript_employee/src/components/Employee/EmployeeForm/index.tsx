@@ -248,9 +248,11 @@ const classes = useStyles();
         <React.Fragment>         
             <div className={classes.form}>
                 <h1 className={classes.form__title}>Edit Record</h1>       
-                <button className={classes.form__wrapper__main__btn}  >
-                            Back
-                </button>
+                <Link to="/">
+                  <button className={classes.form__wrapper__main__btn}  >
+                          Back
+                  </button>
+                </Link>
                 <form className="form__wrapper" onSubmit={(e)=>handleSubmit(e)}>      
                     <div className={classes.form__wrapper__main}>            
                         <div className={classes.form__wrapper__main__half}>
