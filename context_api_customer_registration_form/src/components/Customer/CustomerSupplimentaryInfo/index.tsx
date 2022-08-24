@@ -8,6 +8,8 @@ import Checkbox  from '@material-ui/core/Checkbox';
 import FormLabel from '@material-ui/core/FormLabel'; 
 import { Customer } from '../../../model';
 import { CustomerContext } from "../../contexts/CustomerContext"; 
+import Modal from '@material-ui/core/Modal';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
  
 const useStyles = makeStyles({   
     formInput: {     
@@ -132,6 +134,24 @@ const useStyles = makeStyles({
       gridColumn: "4", 
       marginLeft: "10px"
     },
+    paper: {
+      position: 'absolute',
+      width: 250,     
+      height: 100,
+      border: '2px solid #000',
+      backgroundColor: '#fff',      
+      padding: "30px 50px 45px 80px",
+    },
+    formInputModalButton:{
+      border: '1px solid #000',
+      marginLeft: "20px",
+      borderRadius: '20px',
+      padding: "0",
+      marginBottom: "5px",
+      height:"25px",
+      backgroundColor: "#fff",
+      width: "50px",
+    },
    }
   );  
   type ErrorType = {
@@ -143,11 +163,31 @@ const useStyles = makeStyles({
     setError: React.Dispatch<React.SetStateAction<ErrorType>>; 
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   };
+
+ 
+  
+  function getModalStyle() {
+    const top = 40;
+    const left = 50 ;
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
 const CustomerSupplimentaryInfo:React.FC =()=>{      
-  const { customer } = React.useContext(CustomerContext) as CustomerSupplimentaryInfoProps;
-  const { error } = React.useContext(CustomerContext) as CustomerSupplimentaryInfoProps;
-  const { setError } = React.useContext(CustomerContext) as CustomerSupplimentaryInfoProps; 
-  const { handleFormChange } = React.useContext(CustomerContext) as CustomerSupplimentaryInfoProps;     
+  const { customer, error, setError, handleFormChange } = React.useContext(CustomerContext) as CustomerSupplimentaryInfoProps;   
+  
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 const classes = useStyles();
     return(
         <React.Fragment>   
@@ -165,15 +205,48 @@ const classes = useStyles();
                     InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
                 />     
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Gender</FormLabel>
-                <TextField
-                    name="gender"
-                    id= "gender"
-                    className={`${classes.formInputBox} ${classes.formInputBoxOne}`}       
-                    onChange={handleFormChange}
-                    helperText={error.gender}
-                    error={Boolean(error.gender)}                          
-                    InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
-                />   
+ 
+                   <button type="button" 
+                      onClick={handleOpen}
+                      className={`${classes.formInputModalButton}`}                        
+                      >
+                     <MoreHorizIcon />
+                  </button>
+                  <Modal
+                      open={open}
+                      onClose={handleClose}                      
+                      aria-labelledby="simple-modal-title"
+                      aria-describedby="simple-modal-description"
+                    >
+                      <div style={modalStyle} className={classes.paper}>                      
+
+                      <FormControl component="fieldset" >   
+                      <FormLabel  >Select an option:</FormLabel>         
+                      <RadioGroup aria-label="receipt"                       
+                          name="gender"                   
+                          onChange={handleFormChange}
+                          value={customer?.gender }
+                        >
+                          <FormControlLabel 
+                            value="Male"                                            
+                            control={<Radio  size="small" color="primary"  />} 
+                            label={<Typography className={classes.formInputRadioButtonText}>Male</Typography>}
+                          />
+                          <FormControlLabel  
+                            value="Female"                       
+                            control={<Radio size="small" color="primary"  />} 
+                            label={<Typography className={classes.formInputRadioButtonText}>Female</Typography>}
+                          />   
+                          <FormControlLabel  
+                            value="Others"                       
+                            control={<Radio size="small" color="primary"  />} 
+                            label={<Typography className={classes.formInputRadioButtonText}>Others</Typography>}
+                          />        
+                        </RadioGroup>
+                      </FormControl> 
+                         
+                        </div>
+                  </Modal>
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Age</FormLabel>
                 <TextField
                     name="age"
@@ -294,9 +367,11 @@ const classes = useStyles();
                     InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
                 />      
                 <SearchOutlined className={classes.searchIcon} />  
-                <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Receipt</FormLabel>              
+
+                <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Receipt</FormLabel>  
+                            
                 <FormControl component="fieldset" >            
-                  <RadioGroup aria-label="receipt" className={`${classes.formInputRadioButtonGroup}`} name="type"  
+                  <RadioGroup aria-label="receipt" className={`${classes.formInputRadioButtonGroup}`} name="receipt"  
                  
                   onChange={handleFormChange}>
                     <FormControlLabel 
@@ -310,7 +385,9 @@ const classes = useStyles();
                       label={<Typography className={classes.formInputRadioButtonText}>don't want</Typography>}
                     />          
                   </RadioGroup>
-                </FormControl>   
+                </FormControl>  
+
+
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Receipt address</FormLabel>
                 <TextField
                     name="receiptAddress"

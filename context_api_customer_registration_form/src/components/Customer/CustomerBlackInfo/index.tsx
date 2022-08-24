@@ -65,13 +65,9 @@ const useStyles = makeStyles({
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   };
 
-const CustomerContact:React.FC =()=>{      
-  
-  const { customer } = React.useContext(CustomerContext) as CustomerContactProps;
-  const { error } = React.useContext(CustomerContext) as CustomerContactProps;
-  const { setError } = React.useContext(CustomerContext) as CustomerContactProps; 
-  const { handleFormChange } = React.useContext(CustomerContext) as CustomerContactProps; 
-  
+const CustomerContact:React.FC =()=>{     
+const { customer, error, setError, handleFormChange } = React.useContext(CustomerContext) as CustomerContactProps;
+   
 const classes = useStyles();
     return(
         <React.Fragment>    

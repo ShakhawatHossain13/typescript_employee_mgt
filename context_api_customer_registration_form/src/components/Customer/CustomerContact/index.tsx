@@ -86,10 +86,8 @@ const useStyles = makeStyles({
   };
 
 const CustomerContact:React.FC =()=>{   
-  const { customer } = React.useContext(CustomerContext) as CustomerContactProps;
-  const { error } = React.useContext(CustomerContext) as CustomerContactProps;
-  const { setError } = React.useContext(CustomerContext) as CustomerContactProps; 
-  const { handleFormChange } = React.useContext(CustomerContext) as CustomerContactProps;     
+const { customer, error, setError, handleFormChange } = React.useContext(CustomerContext) as CustomerContactProps;
+  
 const emailRegex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const classes = useStyles();
 

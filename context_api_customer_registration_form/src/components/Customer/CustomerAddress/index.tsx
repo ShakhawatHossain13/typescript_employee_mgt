@@ -78,11 +78,7 @@ const useStyles = makeStyles({
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   };
 const CustomerAddress:React.FC=()=>{      
-  
-  const { customer } = React.useContext(CustomerContext) as CustomerAddressProps;
-  const { error } = React.useContext(CustomerContext) as CustomerAddressProps;
-  const { setError } = React.useContext(CustomerContext) as CustomerAddressProps; 
-  const { handleFormChange } = React.useContext(CustomerContext) as CustomerAddressProps;
+const { customer, error, setError, handleFormChange } = React.useContext(CustomerContext) as CustomerAddressProps; 
 const classes = useStyles();
     return(
         <React.Fragment>           

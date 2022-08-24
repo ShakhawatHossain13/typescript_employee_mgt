@@ -113,29 +113,11 @@ const CustomerBasicInfo:React.FC=()=>{
   const { error } = React.useContext(CustomerContext) as CustomerBasicInfoProps;
   const { setError } = React.useContext(CustomerContext) as CustomerBasicInfoProps; 
   const { handleFormChange } = React.useContext(CustomerContext) as CustomerBasicInfoProps;
-
-  const name : string[]= [
-   "name",
-   "title",
-  "furigana",
-   "sortcode",
-   "search",
-   "serviceLevel",
-   "prefectures",
-   "groupCode",
-  ]
-  const id = {
-    name:"name",
-    title:"title",
-    furigana:"furigana",
-    sortcode:"sortcode",
-    search:"search",
-    serviceLevel:"serviceLevel",
-    prefectures:"prefectures",
-    groupCode:"groupCode",
-   }
+ 
   
-const phoneRegex = "^[0-9-]+$|^$";          
+const phoneRegex = "^[0-9-]+$|^$";   
+const postalRegex = "^[0-9-]+$|^$";
+
 const classes = useStyles();
     return(
         <React.Fragment>     
@@ -157,7 +139,7 @@ const classes = useStyles();
                   }}  
                   helperText={error.tel}
                   error={Boolean(error.tel)}                          
-                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' , paddingBottom: '0px' }}}            
+                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' }}}            
               />      
               <TextFieldBasic 
                 name="name"
@@ -194,7 +176,9 @@ const classes = useStyles();
                 RequiredFieldClass={classes.formInputRequired}
                 RequiredFieldText = {""}
                 handleFormChange={handleFormChange}
-              />             
+              />    
+
+
               <TextFieldBasic 
                 name="sortcode"
                 id= "sortcode"
@@ -207,19 +191,27 @@ const classes = useStyles();
                 RequiredFieldText = {""}
                 handleFormChange={handleFormChange}
               />
-              <TextFieldBasic 
+              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>T</FormLabel>
+              <TextField
                   name="search"
-                  id= "search"
-                  text="T"
+                  id= "search"                  
                   value={customer?.search}
-                  error={error?.search} 
-                  Fclasses={`${classes.formInputLabel} ${classes.formInputLabelOne}`} 
-                  Tclasses={`${classes.formInputBox} ${classes.formInputBoxOne}`}
-                  RequiredFieldClass={classes.formInputRequired}
-                  RequiredFieldText = {""}
-                  handleFormChange={handleFormChange}
-                />
-              <SearchOutlined className={classes.searchIcon} />           
+                  className={`${classes.formInputBox} ${classes.formInputBoxOne}`}  
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    if (event.target.value.match(postalRegex)) {
+                      return handleFormChange(event);
+                    } else{
+                      setError((prev) => ({
+                        ...prev,
+                        [error.search]: "Invalid",
+                      }));
+                    }
+                  }}  
+                  helperText={error.search}
+                  error={Boolean(error.search)}                          
+                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' }}}            
+              />  
+              <SearchOutlined className={classes.searchIcon} />    
               <TextFieldBasic 
                   name="serviceLevel"
                   id= "serviceLevel"
