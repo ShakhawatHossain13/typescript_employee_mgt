@@ -333,7 +333,7 @@ const classes = useStyles();
                     id= "rejectionManagement">                     
                     <FormControlLabel                  
                       control={
-                        <Checkbox              
+                        <Checkbox                                  
                           name="dm"
                           color="primary"      
                           onChange={handleFormChange}                      
