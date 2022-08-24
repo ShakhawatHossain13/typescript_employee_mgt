@@ -163,9 +163,7 @@ const useStyles = makeStyles({
     setError: React.Dispatch<React.SetStateAction<ErrorType>>; 
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   };
-
  
-  
   function getModalStyle() {
     const top = 40;
     const left = 50 ;
@@ -187,6 +185,8 @@ const CustomerSupplimentaryInfo:React.FC =()=>{
   const handleClose = () => {
     setOpen(false);
   };
+
+const discountRegex = "^[0-9.]+$|^$";  
 
 const classes = useStyles();
     return(
@@ -402,8 +402,18 @@ const classes = useStyles();
                 <TextField
                     name="discountRate"
                     id= "discountRate"
+                    value={customer?.discountRate}
                     className={`${classes.formInputBox} ${classes.formInputBoxOne}`}   
-                    onChange={handleFormChange}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      if (event.target.value.match(discountRegex)) {
+                        return handleFormChange(event);
+                      } else{
+                        setError((prev) => ({
+                          ...prev,
+                          [error.discountRate]: "Invalid",
+                        }));
+                      }
+                    }} 
                     helperText={error.age}
                     error={Boolean(error.age)}                          
                     InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            

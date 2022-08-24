@@ -109,11 +109,7 @@ const useStyles = makeStyles({
   };
 const CustomerBasicInfo:React.FC=()=>{    
 
-  const { customer } = React.useContext(CustomerContext) as CustomerBasicInfoProps;
-  const { error } = React.useContext(CustomerContext) as CustomerBasicInfoProps;
-  const { setError } = React.useContext(CustomerContext) as CustomerBasicInfoProps; 
-  const { handleFormChange } = React.useContext(CustomerContext) as CustomerBasicInfoProps;
- 
+const { customer, error, setError, handleFormChange } = React.useContext(CustomerContext) as CustomerBasicInfoProps;
   
 const phoneRegex = "^[0-9-]+$|^$";   
 const postalRegex = "^[0-9-]+$|^$";
