@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     formInputBox: {          
       fontFamily: "'Times New Roman', Times, serif",
       border: '1px solid #000',
-      marginLeft: "20px",
+      marginLeft: "12px",
       borderRadius: '20px',
       padding: "0 5px",
       marginBottom: "12px",
@@ -67,7 +67,6 @@ const useStyles = makeStyles({
       padding: "0 2px",
       verticalAlign: "middle",
       marginLeft: "2px",
-
     },
    }
   );  

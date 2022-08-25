@@ -193,7 +193,6 @@ const formData: CustomerDataType = {
     customerGeneric5: "",    
 };
  
-
 const CustomerForm: React.FC=()=> { 
   const[customer, setCustomer] = useState<Customer>(formData);
   const [error, setError] = React.useState<ErrorType>(initialError);     
