@@ -60,6 +60,10 @@ const useStyles = makeStyles({
     formInputBoxFour: {          
       gridColumn: "6", 
     }, 
+    formInputRequired:{
+      color: "#ff0000",
+      marginLeft: "2px"
+    },
    }
   );  
   type ErrorType = {
@@ -76,7 +80,7 @@ const { customer, error, setError, handleFormChange } = React.useContext(Custome
 const classes = useStyles();
     return(
         <React.Fragment>           
-              <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Address line 1</FormLabel>
+              <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Address 1<span className={classes.formInputRequired}>*</span></FormLabel>
               <TextField
                   name="address1"
                   id= "address1"
@@ -86,8 +90,7 @@ const classes = useStyles();
                   helperText={error.address1}
                   error={Boolean(error.address1)}                          
                   InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
-              /> 
- 
+              />  
               <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Address 2</FormLabel>
               <TextField
                   name="address2"
@@ -121,7 +124,7 @@ const classes = useStyles();
                   error={Boolean(error.address4)}                  
                   InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
               />           
-              <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Company Name</FormLabel>
+              <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Company<span className={classes.formInputRequired}>*</span></FormLabel>
               <TextField
                   name="company"
                   id= "company" 
@@ -132,7 +135,7 @@ const classes = useStyles();
                   error={Boolean(error.company)}                  
                   InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
               />   
-              <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Department Name</FormLabel>
+              <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Department<span className={classes.formInputRequired}>*</span></FormLabel>
               <TextField
                   name="department"
                   id= "department" 

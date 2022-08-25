@@ -30,7 +30,9 @@ export interface Customer {
     lastStoreCd: string,
     customerRank: string,
     creditRegistration: string,
-    rejectionManagement: string,
+  
+    doNotSendDM: string,
+    doNotIssuePurchseOrder: string,
     requester: string,
     requirement: string,
     receipt: string,
@@ -43,5 +45,5 @@ export interface Customer {
     customerGeneric2: string,
     customerGeneric3: string,  
     customerGeneric4: string,
-    customerGeneric5: string,    
+    customerGeneric5: string,     
 };

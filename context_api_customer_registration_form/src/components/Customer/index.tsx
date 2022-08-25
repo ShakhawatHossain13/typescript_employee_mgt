@@ -1,4 +1,4 @@
-import React, {useState} from 'react';   
+import React, {useState, useEffect} from 'react';   
 import {makeStyles} from "@material-ui/core";  
 import CustomerHead from './CustomerHead';
 import CustomerBasicInfo from './CustomerBasicInfo';
@@ -80,8 +80,9 @@ const initialError: ErrorType = {
     classification: "",
     lastStoreCd: "",
     customerRank: "",
-    creditRegistration: "",
-    rejectionManagement: "",
+    creditRegistration: "",    
+    doNotSendDM: "",
+    doNotIssuePurchseOrder: "",
     requester: "",
     requirement: "",
     receipt: "",
@@ -128,8 +129,9 @@ type CustomerDataType = {
     classification: string,
     lastStoreCd: string,
     customerRank: string,
-    creditRegistration: string,
-    rejectionManagement: string,
+    creditRegistration: string,   
+    doNotSendDM: string,
+    doNotIssuePurchseOrder: string,
     requester: string,
     requirement: string,
     receipt: string,
@@ -142,7 +144,7 @@ type CustomerDataType = {
     customerGeneric2: string,
     customerGeneric3: string,  
     customerGeneric4: string,
-    customerGeneric5: string,    
+    customerGeneric5: string,      
 };
 
 const formData: CustomerDataType = {
@@ -176,8 +178,7 @@ const formData: CustomerDataType = {
     classification: "",
     lastStoreCd: "",
     customerRank: "",
-    creditRegistration: "",
-    rejectionManagement: "",
+    creditRegistration: "", 
     requester: "",
     requirement: "",
     receipt: "dont",
@@ -190,7 +191,9 @@ const formData: CustomerDataType = {
     customerGeneric2: "",
     customerGeneric3: "",  
     customerGeneric4: "",
-    customerGeneric5: "",    
+    customerGeneric5: "",     
+    doNotSendDM: "no",
+    doNotIssuePurchseOrder: "no",   
 };
  
 const CustomerForm: React.FC=()=> { 
@@ -198,6 +201,7 @@ const CustomerForm: React.FC=()=> {
   const [error, setError] = React.useState<ErrorType>(initialError);     
   const classes = useStyles(); 
 
+   
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setCustomer((prev) => {
@@ -211,7 +215,7 @@ const CustomerForm: React.FC=()=> {
       [name]: "",
     }));
   }; 
- 
+
 const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
        /** 
         Method for validating fields
@@ -264,7 +268,7 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
           setError(copyErrors);    
           return hasError;
         };
- 
+
   return (  
     <React.Fragment>     
     <CustomerContext.Provider value={{customer, error,  setError, handleFormChange}} >

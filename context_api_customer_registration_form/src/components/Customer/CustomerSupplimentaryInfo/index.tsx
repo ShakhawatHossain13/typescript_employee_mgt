@@ -9,7 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { Customer } from '../../../model';
 import { CustomerContext } from "../../contexts/CustomerContext"; 
 import Modal from '@material-ui/core/Modal';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz'; 
  
 const useStyles = makeStyles({   
     formInput: {     
@@ -199,10 +199,9 @@ const classes = useStyles();
                     InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
                 />     
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Gender</FormLabel>
- 
                    <button type="button" 
                       onClick={handleOpen}
-                      className={`${classes.formInputModalButton}`}                        
+                      className={`${classes.formInputModalButton}`}                       
                       >
                      <MoreHorizIcon />
                   </button>
@@ -212,8 +211,7 @@ const classes = useStyles();
                       aria-labelledby="simple-modal-title"
                       aria-describedby="simple-modal-description"
                     >
-                      <div style={modalStyle} className={classes.paper}>                      
-
+                      <div style={modalStyle} className={classes.paper}>                     
                       <FormControl component="fieldset" >   
                       <FormLabel  >Select an option:</FormLabel>         
                       <RadioGroup aria-label="gender"                       
@@ -239,7 +237,7 @@ const classes = useStyles();
                         </RadioGroup>
                       </FormControl> 
                          
-                        </div>
+                    </div>
                   </Modal>
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Age</FormLabel>
                 <TextField
@@ -328,8 +326,8 @@ const classes = useStyles();
                     <FormControlLabel                  
                       control={
                         <Checkbox                                  
-                          name="dm"
-                          value={true}
+                          name="doNotSendDM"
+                          value="yes"
                           color="primary"      
                           onChange={handleFormChange}                      
                         />
@@ -339,8 +337,8 @@ const classes = useStyles();
                      <FormControlLabel                       
                       control={
                         <Checkbox            
-                          name="purchase"
-                          value={true}
+                          name="doNotIssuePurchseOrder"
+                          value="yes"
                           color="primary"  
                           onChange={handleFormChange}                        
                         />

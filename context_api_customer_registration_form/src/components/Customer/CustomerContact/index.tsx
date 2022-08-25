@@ -68,6 +68,10 @@ const useStyles = makeStyles({
       verticalAlign: "middle",
       marginLeft: "2px",
     },
+    formInputRequired:{
+      color: "#ff0000",
+      marginLeft: "2px"
+    },
    }
   );  
  
@@ -94,6 +98,7 @@ const classes = useStyles();
           <div className={classes.formInput}> 
               <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email 
               <span className={classes.formInputBoxEmailNo}>1</span>
+              <span className={classes.formInputRequired}>*</span>
               </FormLabel>
               <TextField
                   name="email"
@@ -107,6 +112,7 @@ const classes = useStyles();
 
               <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email 
               <span className={classes.formInputBoxEmailNo}>2</span>
+              <span className={classes.formInputRequired}>*</span>
               </FormLabel>
               <TextField
                   name="email1"
@@ -117,7 +123,7 @@ const classes = useStyles();
                   error={Boolean(error.email1)}                          
                   InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
               /> 
-              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email<span className={classes.formInputBoxEmailNo}>3</span></FormLabel>
+              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email<span className={classes.formInputBoxEmailNo}>3</span>  <span className={classes.formInputRequired}>*</span></FormLabel>
               <TextField
                   name="email2"
                   id= "email2"

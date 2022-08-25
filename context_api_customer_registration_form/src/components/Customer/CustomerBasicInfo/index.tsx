@@ -41,11 +41,13 @@ const useStyles = makeStyles({
       fontSize: "12px",
       backgroundColor: "#fff",   
       width: "80%",   
+      WebkitBoxShadow: "0 0 0 0px white inset",
       "& .MuiFormHelperText-root": {         
         marginTop: "-6px",
         fontSize:"11px",              
         padding: "0 7px",
       },
+      
     }, 
     formInputBoxOne: {  
       gridColumn: "2/4",
@@ -154,7 +156,7 @@ const classes = useStyles();
                 Fclasses={`${classes.formInputLabel} ${classes.formInputLabelTwo}`} 
                 Tclasses={`${classes.formInputBox} ${classes.formInputBoxTwo}`}
                 RequiredFieldClass={classes.formInputRequired}
-                RequiredFieldText = {""}
+                RequiredFieldText = {"*"}
                 handleFormChange={handleFormChange}
               /> 
               <TextFieldBasic 
@@ -166,11 +168,9 @@ const classes = useStyles();
                 Fclasses={`${classes.formInputLabel} ${classes.formInputLabelOne}`} 
                 Tclasses={`${classes.formInputBox} ${classes.formInputBoxOne}`}
                 RequiredFieldClass={classes.formInputRequired}
-                RequiredFieldText = {""}
+                RequiredFieldText = {"*"}
                 handleFormChange={handleFormChange}
               />    
-
-
               <TextFieldBasic 
                 name="sortcode"
                 id= "sortcode"
@@ -180,10 +180,12 @@ const classes = useStyles();
                 Fclasses={`${classes.formInputLabel} ${classes.formInputLabelFour}`} 
                 Tclasses={`${classes.formInputBox} ${classes.formInputBoxFour}`}
                 RequiredFieldClass={classes.formInputRequired}
-                RequiredFieldText = {""}
+                RequiredFieldText = {"*"}
                 handleFormChange={handleFormChange}
               />
-              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>T</FormLabel>
+              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>T
+                   <span className={classes.formInputRequired}>*</span>
+              </FormLabel>
               <TextField
                   name="search"
                   id= "search"                  
@@ -213,7 +215,7 @@ const classes = useStyles();
                   Fclasses={`${classes.formInputLabel} ${classes.formInputLabelFour}`} 
                   Tclasses={`${classes.formInputBox} ${classes.formInputBoxFour}`}
                   RequiredFieldClass={classes.formInputRequired}
-                  RequiredFieldText = {""}
+                  RequiredFieldText = {"*"}
                   handleFormChange={handleFormChange}
                 />             
               <TextFieldBasic 
@@ -225,7 +227,7 @@ const classes = useStyles();
                   Fclasses={`${classes.formInputLabel} ${classes.formInputLabelOne}`} 
                   Tclasses={`${classes.formInputBox} ${classes.formInputBoxFive}`}
                   RequiredFieldClass={classes.formInputRequired}
-                  RequiredFieldText = {""}
+                  RequiredFieldText = {"*"}
                   handleFormChange={handleFormChange}
                 />              
               <TextFieldBasic 
@@ -237,7 +239,7 @@ const classes = useStyles();
                   Fclasses={`${classes.formInputLabel} ${classes.formInputLabelFour}`} 
                   Tclasses={`${classes.formInputBox} ${classes.formInputBoxFour}`}
                   RequiredFieldClass={classes.formInputRequired}
-                  RequiredFieldText = {""}
+                  RequiredFieldText = {"*"}
                   handleFormChange={handleFormChange}
               />        
         </React.Fragment>
