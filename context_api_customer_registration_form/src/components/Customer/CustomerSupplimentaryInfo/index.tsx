@@ -212,8 +212,8 @@ const classes = useStyles();
                       aria-describedby="simple-modal-description"
                     >
                       <div style={modalStyle} className={classes.paper}>                     
-                      <FormControl component="fieldset" >   
-                      <FormLabel  >Select an option:</FormLabel>         
+                      <FormControl component="fieldset">   
+                      <FormLabel>Select an option:</FormLabel>         
                       <RadioGroup aria-label="gender"                       
                           name="gender"                   
                           onChange={handleFormChange}
@@ -235,10 +235,11 @@ const classes = useStyles();
                             label={<Typography className={classes.formInputRadioButtonText}>Others</Typography>}
                           />        
                         </RadioGroup>
-                      </FormControl> 
-                         
+                      </FormControl>                        
                     </div>
                   </Modal>
+                  <span className={classes.formInputLabel} style={{ textAlign: "left" }}>{customer?.gender }</span>
+                  
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Age</FormLabel>
                 <TextField
                     name="age"
