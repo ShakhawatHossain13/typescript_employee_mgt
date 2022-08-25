@@ -97,7 +97,8 @@ const initialError: ErrorType = {
     customerGeneric5: "", 
 };
 
-type CustomerDataType = {    
+type CustomerDataType = {   
+    type:string, 
     tel:string,
     name: string,
     title: string, 
@@ -145,6 +146,7 @@ type CustomerDataType = {
 };
 
 const formData: CustomerDataType = {
+    type:"personal",
     tel:"",
     name: "",
     title: "", 
@@ -166,7 +168,7 @@ const formData: CustomerDataType = {
     remarks: "",    
     blackInfo: "",
     regionCode: "",
-    gender: "",
+    gender: "Male",
     age: "",
     customerFactor: "",
     clarificationCode: "",
@@ -178,7 +180,7 @@ const formData: CustomerDataType = {
     rejectionManagement: "",
     requester: "",
     requirement: "",
-    receipt: "",
+    receipt: "dont",
     receiptAddress: "",
     discountRate: "",    
     discountRateMemo: "",
@@ -218,9 +220,8 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
         const isValid = () => {
           let hasError = false;
           const copyErrors: ErrorType = { ...error };  
-
           const emailFields = [                   
-            "email",  
+            "email",   
             "email1",
             "email2",
           ];
@@ -228,6 +229,20 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
             "name",           
             "customerFactor",
             "clarificationCode",
+            "title",
+            "furigana",
+            "sortcode",
+            "search",
+            "serviceLevel",
+            "prefectures",
+            "groupCode",
+            "address1",
+            "company",
+            "department",  
+            "email",   
+            "email1",
+            "email2",
+            "gender",         
           ];  
 
           for (let key in copyErrors) {
@@ -235,7 +250,7 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
               validationFields.includes(key) &&
               customer[key as keyof typeof customer] === "" 
             ) {
-              copyErrors[key] = "!";
+              copyErrors[key] = "required";
               hasError = true;
             } else if (  
               emailFields.includes(key) &&
@@ -248,7 +263,6 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
             }   
           }               
           setError(copyErrors);    
-          console.log(error);
           return hasError;
         };
  

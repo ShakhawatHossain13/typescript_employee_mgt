@@ -1,4 +1,5 @@
 export interface Customer {    
+    type: string,
     tel:string,
     name: string,
     title: string, 

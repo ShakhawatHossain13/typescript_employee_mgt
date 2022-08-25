@@ -62,19 +62,14 @@ const useStyles = makeStyles({
       marginLeft: "20px",
       borderRadius: '20px',
       padding: "0 5px",
-      marginBottom: "5px",
+      marginBottom: "12px",
       height:"25px",
       fontSize: "12px",
-      backgroundColor: "#fff",      
+      backgroundColor: "#fff",   
+      width: "80%",   
       "& .MuiFormHelperText-root": {         
-        marginTop: "-4px",
-        fontSize:"11px",
-        position: "absolute",
-        top: "6px",
-        right:"-26px",
-        fontWeight: "900",
-        border: "1.5px solid red",
-        borderRadius: "50%",
+        marginTop: "-6px",
+        fontSize:"11px",              
         padding: "0 7px",
       },
     }, 
@@ -114,8 +109,7 @@ const useStyles = makeStyles({
       backgroundColor: "#fff",
     },
     formInputPercentage:{
-      marginLeft: "10px",
-      
+      marginLeft: "20px",      
     },
     formInputCheckBox:{     
       gridColumn: "1/5",
@@ -222,7 +216,7 @@ const classes = useStyles();
 
                       <FormControl component="fieldset" >   
                       <FormLabel  >Select an option:</FormLabel>         
-                      <RadioGroup aria-label="receipt"                       
+                      <RadioGroup aria-label="gender"                       
                           name="gender"                   
                           onChange={handleFormChange}
                           value={customer?.gender }
@@ -335,6 +329,7 @@ const classes = useStyles();
                       control={
                         <Checkbox                                  
                           name="dm"
+                          value={true}
                           color="primary"      
                           onChange={handleFormChange}                      
                         />
@@ -345,6 +340,7 @@ const classes = useStyles();
                       control={
                         <Checkbox            
                           name="purchase"
+                          value={true}
                           color="primary"  
                           onChange={handleFormChange}                        
                         />
@@ -371,9 +367,13 @@ const classes = useStyles();
                 <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Receipt</FormLabel>  
                             
                 <FormControl component="fieldset" >            
-                  <RadioGroup aria-label="receipt" className={`${classes.formInputRadioButtonGroup}`} name="receipt"  
-                 
-                  onChange={handleFormChange}>
+                  <RadioGroup 
+                    aria-label="receipt" 
+                    className={`${classes.formInputRadioButtonGroup}`} 
+                    name="receipt"                    
+                    onChange={handleFormChange}
+                    value={customer?.receipt }
+                  >
                     <FormControlLabel 
                       value="requirement"                                            
                       control={<Radio  size="small" color="primary" className={classes.formInputRadioButton1}/>} 

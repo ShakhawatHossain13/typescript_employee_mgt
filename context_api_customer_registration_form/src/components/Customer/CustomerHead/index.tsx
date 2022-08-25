@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme)=>
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   };
 const CustomerHead:React.FC=()=>{       
-  const { handleFormChange } = React.useContext(CustomerContext) as CustomerHeadProps; 
+  const {customer, handleFormChange } = React.useContext(CustomerContext) as CustomerHeadProps; 
 const classes = useStyles();
     return(
         <React.Fragment>     
@@ -72,7 +72,12 @@ const classes = useStyles();
               <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelTwo}`}>Online customer ID:</FormLabel>               
               <FormLabel  className={`${classes.formInputLabel} ${classes.formInputViewTwo}`}>01</FormLabel>
               <FormControl component="fieldset" className={`${classes.formInputRadioButtonGroup}`}>            
-                <RadioGroup aria-label="type" name="type"  onChange={handleFormChange}>
+                <RadioGroup 
+                  aria-label="type" 
+                  name="type" 
+                  onChange={handleFormChange}
+                  value={customer?.type}
+                 >
                   <FormControlLabel 
                     value="personal"                 
                     control={<Radio  size="small" color="primary" className={classes.formInputRadioButton}/>} 

@@ -38,19 +38,13 @@ const useStyles = makeStyles({
       marginLeft: "20px",
       borderRadius: '20px',
       padding: "0 5px",
-      marginBottom: "5px",
+      marginBottom: "12px",
       height:"25px",
       fontSize: "12px",
       backgroundColor: "#fff",      
       "& .MuiFormHelperText-root": {         
-        marginTop: "-4px",
-        fontSize:"11px",
-        position: "absolute",
-        top: "6px",
-        right:"-26px",
-        fontWeight: "900",
-        border: "1px solid red",
-        borderRadius: "50%",
+        marginTop: "-6px",
+        fontSize:"11px",              
         padding: "0 7px",
       },
     }, 
@@ -93,6 +87,7 @@ const classes = useStyles();
                   error={Boolean(error.address1)}                          
                   InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
               /> 
+ 
               <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Address 2</FormLabel>
               <TextField
                   name="address2"

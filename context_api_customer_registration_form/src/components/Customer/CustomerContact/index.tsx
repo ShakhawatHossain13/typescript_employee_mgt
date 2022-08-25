@@ -40,16 +40,14 @@ const useStyles = makeStyles({
       marginLeft: "20px",
       borderRadius: '20px',
       padding: "0 5px",
-      marginBottom: "5px",
+      marginBottom: "12px",
       height:"25px",
       fontSize: "12px",
-      backgroundColor: "#fff",  
+      backgroundColor: "#fff",      
       "& .MuiFormHelperText-root": {         
-        marginTop: "-4px",
-        fontSize:"12px",
-        position: "absolute",
-        top: "6px",
-        right:"-75px",       
+        marginTop: "-6px",
+        fontSize:"11px",              
+        padding: "0 7px",
       },
     }, 
     formInputBoxOne: {  
@@ -102,11 +100,7 @@ const classes = useStyles();
                   name="email"
                   id= "email"               
                   className={`${classes.formInputBox} ${classes.formInputBoxOne}`}   
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    if (event.target.value.match(emailRegex)) {
-                     return handleFormChange(event);
-                    }  
-                  }}  
+                  onChange= {handleFormChange}
                   helperText={error.email}
                   error={Boolean(error.email)}                          
     	            InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}                 
@@ -119,11 +113,7 @@ const classes = useStyles();
                   name="email1"
                   id= "email1"
                   className={`${classes.formInputBox} ${classes.formInputBoxOne}`}    
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    if (event.target.value.match(emailRegex)) {
-                     return handleFormChange(event);
-                    }
-                  }} 
+                  onChange= {handleFormChange}
                   helperText={error.email1}
                   error={Boolean(error.email1)}                          
                   InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
@@ -133,11 +123,7 @@ const classes = useStyles();
                   name="email2"
                   id= "email2"
                   className={`${classes.formInputBox} ${classes.formInputBoxOne}`}      
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    if (event.target.value.match(emailRegex)) {
-                     return handleFormChange(event);
-                    }  
-                  }} 
+                  onChange= {handleFormChange}
                   helperText={error.email2}
                   error={Boolean(error.email2)}                          
     	            InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
