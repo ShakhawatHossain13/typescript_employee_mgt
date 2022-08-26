@@ -22,10 +22,8 @@ const useStyles = makeStyles({
       textAlign: "right", 
       fontSize: "12px",
       color: "#000",   
-      display: "inline-block",
-      width:"65px",   
-    }, 
-    
+      display: "inline-block", 
+    },     
     formInputBox: {          
       fontFamily: "'Times New Roman', Times, serif",
       border: '1px solid #000',
@@ -42,7 +40,6 @@ const useStyles = makeStyles({
         padding: "0 7px",
       },
     }, 
-    
    }
   );  
  
@@ -73,6 +70,7 @@ const classes = useStyles();
                     text="Email"
                     no="1"
                     inputBoxWidth="60%"
+                    inputLabelWidth="70px"
                     value={customer?.email}
                     error={error?.email}               
                     RequiredFieldText = {"*"}
@@ -84,25 +82,26 @@ const classes = useStyles();
                     text="Email"
                     no="2"
                     inputBoxWidth="60%"
+                    inputLabelWidth="70px"
                     value={customer?.email1}
                     error={error?.email1}               
                     RequiredFieldText = {"*"}
                     handleFormChange={handleFormChange}
                   />
-              
                 <CCEmailInput 
                     name="email2"
                     id= "email2"
                     text="Email"
                     no="3"
                     inputBoxWidth="60%"
+                    inputLabelWidth="70px"
                     value={customer?.email2}
                     error={error?.email2}               
                     RequiredFieldText = {"*"}
                     handleFormChange={handleFormChange}
                   />         
                 <div className={classes.formInputWrapper}>
-                  <FormLabel  className={`${classes.formInputLabel}`}>remarks</FormLabel>
+                  <FormLabel  className={`${classes.formInputLabel}` } style={{width: "70px"}} >remarks</FormLabel>
                   <TextField 
                       name="remarks"
                       id= "remarks"
@@ -110,7 +109,7 @@ const classes = useStyles();
                       className={`${classes.formInputBox}`}    
                       onChange={handleFormChange}
                       helperText={error.remarks}
-                      style={{height: "40px"}}
+                      style={{height: "40px", width:"60%"}}
                       error={Boolean(error.remarks)}                          
                       InputProps={{ disableUnderline: true, style: { fontSize: '12px' }}}            
                   />      

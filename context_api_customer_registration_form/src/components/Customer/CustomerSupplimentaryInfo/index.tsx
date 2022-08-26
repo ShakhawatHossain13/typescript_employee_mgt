@@ -220,7 +220,7 @@ const classes = useStyles();
                           value={customer?.gender }
                         >
                           <FormControlLabel 
-                            value="Male"                                            
+                            value="Male"                                                                         
                             control={<Radio  size="small" color="primary"  />} 
                             label={<Typography className={classes.formInputRadioButtonText}>Male</Typography>}
                           />
