@@ -4,36 +4,28 @@ import { TextField} from "@material-ui/core";
 import FormLabel from '@material-ui/core/FormLabel'; 
 import { Customer } from '../../../model';
 import { CustomerContext } from "../../contexts/CustomerContext"; 
+import CCEmailInput from "../../Elements/CCEmailInput";
   
 const useStyles = makeStyles({
-  formInput: {      
-      width: "97%",
+  formInput: {     
       backgroundColor:"palegreen",
       margin: "0 auto",
       padding: "10px",    
       gridColumn: "1/9",  
-      display: "grid",     
-      gridTemplateColumns:"repeat(8, 1fr)",  
+      width:"97%", 
     }, 
+    formInputWrapper:{
+      width:"100%",
+    },
     formInputLabel: {       
-      fontFamily: "'Times New Roman', Times, serif", 
-      padding: "6px 0", 
+      fontFamily: "'Times New Roman', Times, serif",       
       textAlign: "right", 
       fontSize: "12px",
-      color: "#000",
+      color: "#000",   
+      display: "inline-block",
+      width:"65px",   
     }, 
-    formInputLabelOne: {      
-      gridColumn: "1",  
-    }, 
-    start:{
-      // gridRowStart:"4",
-    },
-    formInputLabelTwo: {      
-      gridColumn: "3",  
-    }, 
-    formInputLabelFour: {      
-      gridColumn: "5",  
-    }, 
+    
     formInputBox: {          
       fontFamily: "'Times New Roman', Times, serif",
       border: '1px solid #000',
@@ -43,35 +35,14 @@ const useStyles = makeStyles({
       marginBottom: "12px",
       height:"25px",
       fontSize: "12px",
-      backgroundColor: "#fff",      
+      backgroundColor: "#fff",    
       "& .MuiFormHelperText-root": {         
         marginTop: "-6px",
         fontSize:"11px",              
         padding: "0 7px",
       },
     }, 
-    formInputBoxOne: {  
-      gridColumn: "2 / 7",
-     },
-    formInputBoxTwo: {          
-      gridColumn: "2 / 6", 
-    }, 
-    formInputBoxFour: {          
-      gridColumn: "6", 
-    }, 
-    formInputBoxEmailNo:{
-      border: "1px solid #000",
-      borderRadius: "50%",
-      fontSize: "7px",
-      fontWeight: "bold",
-      padding: "0 2px",
-      verticalAlign: "middle",
-      marginLeft: "2px",
-    },
-    formInputRequired:{
-      color: "#ff0000",
-      marginLeft: "2px"
-    },
+    
    }
   );  
  
@@ -95,57 +66,56 @@ const classes = useStyles();
 
     return(
         <React.Fragment>    
-          <div className={classes.formInput}> 
-              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email 
-              <span className={classes.formInputBoxEmailNo}>1</span>
-              <span className={classes.formInputRequired}>*</span>
-              </FormLabel>
-              <TextField
-                  name="email"
-                  id= "email"               
-                  className={`${classes.formInputBox} ${classes.formInputBoxOne}`}   
-                  onChange= {handleFormChange}
-                  helperText={error.email}
-                  error={Boolean(error.email)}                          
-    	            InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}                 
-              /> 
-
-              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email 
-              <span className={classes.formInputBoxEmailNo}>2</span>
-              <span className={classes.formInputRequired}>*</span>
-              </FormLabel>
-              <TextField
-                  name="email1"
-                  id= "email1"
-                  className={`${classes.formInputBox} ${classes.formInputBoxOne}`}    
-                  onChange= {handleFormChange}
-                  helperText={error.email1}
-                  error={Boolean(error.email1)}                          
-                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
-              /> 
-              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>Email<span className={classes.formInputBoxEmailNo}>3</span>  <span className={classes.formInputRequired}>*</span></FormLabel>
-              <TextField
-                  name="email2"
-                  id= "email2"
-                  className={`${classes.formInputBox} ${classes.formInputBoxOne}`}      
-                  onChange= {handleFormChange}
-                  helperText={error.email2}
-                  error={Boolean(error.email2)}                          
-    	            InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
-              /> 
-              <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>remarks</FormLabel>
-              <TextField 
-                  name="remarks"
-                  id= "remarks"
-                  multiline
-                  className={`${classes.formInputBox} ${classes.formInputBoxOne}`}    
-                  onChange={handleFormChange}
-                  helperText={error.remarks}
-                  style={{height: "40px"}}
-                  error={Boolean(error.remarks)}                          
-                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '2px'}}}            
-              />      
-            </div>        
+          <div className={classes.formInput}>         
+              <CCEmailInput 
+                    name="email"
+                    id= "email"
+                    text="Email"
+                    no="1"
+                    inputBoxWidth="60%"
+                    value={customer?.email}
+                    error={error?.email}               
+                    RequiredFieldText = {"*"}
+                    handleFormChange={handleFormChange}
+                  />   
+                <CCEmailInput 
+                    name="email1"
+                    id= "email1"
+                    text="Email"
+                    no="2"
+                    inputBoxWidth="60%"
+                    value={customer?.email1}
+                    error={error?.email1}               
+                    RequiredFieldText = {"*"}
+                    handleFormChange={handleFormChange}
+                  />
+              
+                <CCEmailInput 
+                    name="email2"
+                    id= "email2"
+                    text="Email"
+                    no="3"
+                    inputBoxWidth="60%"
+                    value={customer?.email2}
+                    error={error?.email2}               
+                    RequiredFieldText = {"*"}
+                    handleFormChange={handleFormChange}
+                  />         
+                <div className={classes.formInputWrapper}>
+                  <FormLabel  className={`${classes.formInputLabel}`}>remarks</FormLabel>
+                  <TextField 
+                      name="remarks"
+                      id= "remarks"
+                      multiline
+                      className={`${classes.formInputBox}`}    
+                      onChange={handleFormChange}
+                      helperText={error.remarks}
+                      style={{height: "40px"}}
+                      error={Boolean(error.remarks)}                          
+                      InputProps={{ disableUnderline: true, style: { fontSize: '12px' }}}            
+                  />      
+                  </div>    
+            </div>    
         </React.Fragment>
     )
 }

@@ -6,6 +6,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { Customer } from '../../../model';
 import { CustomerContext } from "../../contexts/CustomerContext"; 
 import TextFieldBasic from "../../Elements/TextFieldBasic";
+import CCInput from "../../Elements/CCInput";
  
 const useStyles = makeStyles({       
     formInputLabel: {       
@@ -146,7 +147,7 @@ const classes = useStyles();
                 RequiredFieldClass={classes.formInputRequired}
                 RequiredFieldText = {"*"}
                 handleFormChange={handleFormChange}
-              />             
+              />                   
               <TextFieldBasic 
                 name="title"
                 id= "title"
