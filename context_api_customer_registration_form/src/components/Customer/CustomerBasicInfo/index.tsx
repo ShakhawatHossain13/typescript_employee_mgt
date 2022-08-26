@@ -18,19 +18,7 @@ const useStyles = makeStyles({
   },
   formInputLabelOne: {
     gridColumn: "1",
-  },
-  formInputLabelTwo: {
-    gridColumn: "4",
-    '@media screen and (max-width: 360px)': {
-      gridColumn: "6",
-    }
-  },
-  formInputLabelFour: {
-    gridColumn: "6",
-    '@media screen and (max-width: 360px)': {
-      gridColumn: "1",
-    }
-  },
+  }, 
   formInputBox: {
     fontFamily: "'Times New Roman', Times, serif",
     border: '1px solid #000',
@@ -51,41 +39,22 @@ const useStyles = makeStyles({
     },
   },
   formInputBoxOne: {
-    gridColumn: "2/4",
+    gridColumn: "2",
     width: "100%",
     '@media screen and (max-width: 360px)': {
       width: "100%",
       gridColumn: "2/5",
     }
-  },
-  formInputBoxTwo: {
-    gridColumn: "5",
-    '@media screen and (max-width: 360px)': {
-      width: "100%",
-      gridColumn: "7/8",
-    }
-  },
-  formInputBoxFour: {
-    gridColumn: "7/9",
-    '@media screen and (max-width: 360px)': {
-      gridColumn: "2/6",
-    }
-  },
-  formInputBoxFive: {
-    gridColumn: "2",
-    '@media screen and (max-width: 360px)': {
-      gridColumn: "2/6",
-    }
-  },
+  }, 
   searchIcon: {
     border: "1px solid #000",
     borderRadius: "50%",
     fontSize: "20px",
     padding: "2px",
-    gridColumn: "5",
-    marginLeft: "10px",
+    gridColumn: "4",
+    marginLeft: "20px",
     backgroundColor: "#fff",
-    textAlign: "left",
+    textAlign: "right",
     '@media screen and (max-width: 360px)': {
       gridColumn: "6",
     }
@@ -116,12 +85,12 @@ const CustomerBasicInfo: React.FC = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Phone</FormLabel>
+      <FormLabel className={`${classes.formInputLabel}`}>Phone<span className={classes.formInputRequired}>*</span></FormLabel>     
       <TextField
         name="tel"
         id="tel"
         value={customer?.tel}
-        className={`${classes.formInputBox} ${classes.formInputBoxOne}`}
+        className={`${classes.formInputBox}  `}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => { 
           setSuggestion("Only number and hyphen");
           if (event.target.value.match(phoneRegex)) {
@@ -133,7 +102,7 @@ const CustomerBasicInfo: React.FC = () => {
             }));
           }
         }}
-        style={{ width: "100%" }}
+        style={{ width: "80%" }}
         helperText={error?.tel || suggestion}
         error={Boolean(error.tel)}
         InputProps={{ disableUnderline: true, style: { fontSize: '12px' } }}
@@ -144,8 +113,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Your name"
         value={customer?.name}
         error={error?.name}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelOne}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxOne}`}
+        inputLabelWidth="75px"
+        inputBoxWidth="80%"       
+        gridLabel="1"
+        gridBox=""
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}
@@ -156,8 +127,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Title"
         value={customer?.title}
         error={error?.title}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelTwo}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxTwo}`}
+        inputLabelWidth="75px"
+        inputBoxWidth=""
+        gridLabel="4"
+        gridBox="5"
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}
@@ -168,8 +141,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Furigana"
         value={customer?.furigana}
         error={error?.furigana}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelOne}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxOne}`}
+        inputLabelWidth="75px"
+        inputBoxWidth="80%"
+        gridLabel="1"
+        gridBox=""
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}
@@ -180,8 +155,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Sort code"
         value={customer?.sortcode}
         error={error?.sortcode}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelFour}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxFour}`}
+        inputLabelWidth="75px"
+        inputBoxWidth="70%"
+        gridLabel="6"
+        gridBox="7"
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}
@@ -204,6 +181,7 @@ const CustomerBasicInfo: React.FC = () => {
             }));
           }
         }}
+        style={{ width: "80%" }}
         helperText={error.search}
         error={Boolean(error.search)}
         InputProps={{ disableUnderline: true, style: { fontSize: '12px' } }}
@@ -215,8 +193,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Service level"
         value={customer?.serviceLevel}
         error={error?.serviceLevel}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelFour}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxFour}`}
+        inputLabelWidth="75px"
+        inputBoxWidth="70%"
+        gridLabel="6"
+        gridBox="7"
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}
@@ -227,8 +207,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Prefectures"
         value={customer?.prefectures}
         error={error?.prefectures}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelOne}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxFive}`}
+        inputLabelWidth="75px"
+        inputBoxWidth="80%"
+        gridLabel="1"
+        gridBox=""
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}
@@ -239,8 +221,10 @@ const CustomerBasicInfo: React.FC = () => {
         text="Group code"
         value={customer?.groupCode}
         error={error?.groupCode}
-        Fclasses={`${classes.formInputLabel} ${classes.formInputLabelFour}`}
-        Tclasses={`${classes.formInputBox} ${classes.formInputBoxFour}`}
+        inputLabelWidth="75px"
+        inputBoxWidth="70%"
+        gridLabel="6"
+        gridBox="7"
         RequiredFieldClass={classes.formInputRequired}
         RequiredFieldText={"*"}
         handleFormChange={handleFormChange}

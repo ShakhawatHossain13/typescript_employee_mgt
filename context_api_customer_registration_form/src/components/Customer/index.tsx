@@ -43,7 +43,7 @@ const useStyles = makeStyles({
       marginTop: "10px",
       padding: "10px",          
       display: "grid",     
-      gridTemplateColumns:"repeat(8, 1fr)", 
+     
     }
   }
 ); 
