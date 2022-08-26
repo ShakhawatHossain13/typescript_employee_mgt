@@ -104,7 +104,7 @@ const useStyles = makeStyles({
     error: ErrorType;
     setError: React.Dispatch<React.SetStateAction<ErrorType>>;
     setCustomer : React.Dispatch<React.SetStateAction<Customer>>;
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 const CustomerBasicInfo:React.FC=()=>{    
 

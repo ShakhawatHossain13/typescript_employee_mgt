@@ -60,9 +60,7 @@ type CCInputProps ={
     value: string;
     error: string;
     RequiredFieldText: string
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
-    // material ui - 
-    // extend
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void; 
   };
  
 const CCInput:React.FC<CCInputProps>=({name, id, text, inputBoxWidth,inputLabelWidth, value, error, RequiredFieldText, handleFormChange})=>{   

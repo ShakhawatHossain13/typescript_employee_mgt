@@ -14,9 +14,7 @@ type TextFieldBasicProps ={
     Tclasses: string;
     RequiredFieldClass:string;
     RequiredFieldText: string
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
-    // material ui - 
-    // extend
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
  
 const TextFieldBasic:React.FC<TextFieldBasicProps>=({name, id, text, value, error, Fclasses, Tclasses, RequiredFieldClass, RequiredFieldText, handleFormChange})=>{   

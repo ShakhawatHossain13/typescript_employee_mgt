@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme)=>
     customer: Customer;
     error: ErrorType;
     setError: React.Dispatch<React.SetStateAction<ErrorType>>; 
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 const CustomerHead:React.FC=()=>{       
   const {customer, handleFormChange } = React.useContext(CustomerContext) as CustomerHeadProps; 

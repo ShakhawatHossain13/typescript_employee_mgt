@@ -47,6 +47,10 @@ const useStyles = makeStyles({
     formInputBoxOne: {  
       gridColumn: "2 / 4",
      }, 
+     formInputRequired:{
+      color: "#ff0000",
+      marginLeft: "2px"
+    },
    }
   );   
   type ErrorType = {
@@ -56,7 +60,7 @@ const useStyles = makeStyles({
     customer: Customer;
     error: ErrorType;
     setError: React.Dispatch<React.SetStateAction<ErrorType>>; 
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
 const CustomerContact:React.FC =()=>{     
