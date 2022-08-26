@@ -247,7 +247,6 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
             "email2",
             "gender",         
           ];  
-
           for (let key in copyErrors) {
             if (
               validationFields.includes(key) &&

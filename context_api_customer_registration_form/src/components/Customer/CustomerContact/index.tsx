@@ -73,7 +73,7 @@ const classes = useStyles();
                     inputLabelWidth="70px"
                     value={customer?.email}
                     error={error?.email}               
-                    RequiredFieldText = {"*"}
+                    requiredFieldText = {"*"}
                     handleFormChange={handleFormChange}
                   />   
                 <CCEmailInput 
@@ -85,7 +85,7 @@ const classes = useStyles();
                     inputLabelWidth="70px"
                     value={customer?.email1}
                     error={error?.email1}               
-                    RequiredFieldText = {"*"}
+                    requiredFieldText = {"*"}
                     handleFormChange={handleFormChange}
                   />
                 <CCEmailInput 
@@ -97,7 +97,7 @@ const classes = useStyles();
                     inputLabelWidth="70px"
                     value={customer?.email2}
                     error={error?.email2}               
-                    RequiredFieldText = {"*"}
+                    requiredFieldText = {"*"}
                     handleFormChange={handleFormChange}
                   />         
                 <div className={classes.formInputWrapper}>

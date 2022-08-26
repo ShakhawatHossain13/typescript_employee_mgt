@@ -62,20 +62,20 @@ type CCEmailInputProps ={
     inputLabelWidth: string,
     value: string;
     error: string;
-    RequiredFieldText: string
+    requiredFieldText: string
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
     // material ui - 
     // extend
   };
  
-const CCEmailInput:React.FC<CCEmailInputProps>=({name, id, text, no,inputBoxWidth, inputLabelWidth, value, error, RequiredFieldText, handleFormChange})=>{   
+const CCEmailInput:React.FC<CCEmailInputProps>=({name, id, text, no,inputBoxWidth, inputLabelWidth, value, error, requiredFieldText, handleFormChange})=>{   
     const classes = useStyles();
     return(
         <React.Fragment>                
             <div className={classes.formInputWrapper}>           
                 <FormLabel style={{width: inputLabelWidth}} className={`${classes.formInputLabel}`} >{text} 
                 <span className={classes.formInputBoxEmailNo}>{no}</span>
-                <span className={classes.formInputRequired}>{RequiredFieldText}</span>            
+                <span className={classes.formInputRequired}>{requiredFieldText}</span>            
                 </FormLabel>           
                 <TextField
                     name={name}
