@@ -9,7 +9,7 @@ type CustomerBasicInfoProps ={
     customer: Customer;
     error: ErrorType;
     setError: React.Dispatch<React.SetStateAction<ErrorType>>;
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
  

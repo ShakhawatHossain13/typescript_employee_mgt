@@ -102,7 +102,7 @@ const CustomerBasicInfo: React.FC = () => {
             }));
           }
         }}
-        style={{ width: "80%" }}
+        style={{ width: "130%" }}
         helperText={error?.tel || suggestion}
         error={Boolean(error.tel)}
         InputProps={{ disableUnderline: true, style: { fontSize: '12px' } }}

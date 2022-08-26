@@ -54,7 +54,7 @@ const useStyles = makeStyles({
 type CCInputProps ={   
     name:string;
     id:string;
-    text:string;  
+    text:string ;  
     inputBoxWidth: string,
     inputLabelWidth: string,
     value: string;
