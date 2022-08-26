@@ -68,7 +68,6 @@ const CustomerAddress: React.FC = () => {
           RequiredFieldText={"*"}
           handleFormChange={handleFormChange}
         />
-
         <CCInput
           name="address2"
           id="address2"
@@ -80,7 +79,6 @@ const CustomerAddress: React.FC = () => {
           RequiredFieldText={""}
           handleFormChange={handleFormChange}
         />
-
         <CCInput
           name="address3"
           id="address3"
@@ -92,7 +90,6 @@ const CustomerAddress: React.FC = () => {
           RequiredFieldText={""}
           handleFormChange={handleFormChange}
         />
-
         <CCInput
           name="address4"
           id="address4"

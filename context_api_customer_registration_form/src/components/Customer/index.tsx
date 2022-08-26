@@ -201,7 +201,6 @@ const CustomerForm: React.FC=()=> {
   const [error, setError] = React.useState<ErrorType>(initialError);     
   const classes = useStyles(); 
 
-   
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setCustomer((prev) => {
@@ -228,7 +227,8 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
             "email1",
             "email2",
           ];
-          const validationFields = [                    
+          const validationFields = [   
+            "tel",                 
             "name",           
             "customerFactor",
             "clarificationCode",
