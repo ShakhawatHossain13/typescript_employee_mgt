@@ -100,7 +100,7 @@ const CustomerBasicInfo: React.FC = () => {
             return handleFormChange(event);                     
           }
         }}
-        style={{ width: "130%" }}
+        style={{ width: "180px" }}
         helperText={error?.tel || suggestion}
         error={Boolean(error.tel)}
         InputProps={{ disableUnderline: true, style: { fontSize: '12px' } }}
