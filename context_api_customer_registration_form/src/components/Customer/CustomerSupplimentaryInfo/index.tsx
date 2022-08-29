@@ -1,4 +1,4 @@
-import React from "react";
+import React , {KeyboardEvent } from "react";
 import { makeStyles } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import { SearchOutlined } from '@material-ui/icons';
@@ -207,6 +207,13 @@ const CustomerSupplimentaryInfo: React.FC = () => {
       };
     });    
   }
+
+  const handleKeyPress =(e: React.KeyboardEvent<HTMLButtonElement>)=>{
+    if(e.key == 'l'){
+      e.preventDefault()
+      handleOpen();
+    }     
+  }
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -225,12 +232,7 @@ const CustomerSupplimentaryInfo: React.FC = () => {
           />
           <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Gender</FormLabel>
           <button type="button"
-            onKeyPress={(e) => {
-              if (e.key === "l") {
-                e.preventDefault();
-                handleOpen();
-              }
-            }}
+            onKeyPress={handleKeyPress}
             className={`${classes.formInputModalButton}`}
           >
           <MoreHorizIcon />
@@ -409,9 +411,7 @@ const CustomerSupplimentaryInfo: React.FC = () => {
             InputProps={{ disableUnderline: true, style: { fontSize: '12px', padding: '0' } }}
           />
           <SearchOutlined className={classes.searchIcon} />
-
           <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>Receipt</FormLabel>
-
           <FormControl component="fieldset" >
             <RadioGroup
               aria-label="receipt"
@@ -419,7 +419,7 @@ const CustomerSupplimentaryInfo: React.FC = () => {
               name="receipt"
               onChange={handleFormChange}
               value={customer?.receipt}
-            >
+              >
               <FormControlLabel
                 value="requirement"
                 control={<Radio size="small" color="primary" className={classes.formInputRadioButton1} />}
@@ -547,7 +547,6 @@ const CustomerSupplimentaryInfo: React.FC = () => {
           <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelThree}`}>22/08/2022</FormLabel>
         </div>
       </div>
-
     </React.Fragment>
   )
 }

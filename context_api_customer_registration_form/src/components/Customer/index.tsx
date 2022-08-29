@@ -212,11 +212,18 @@ const CustomerForm: React.FC=()=> {
       [name]: "",
     }));
   }; 
-
 const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    // document.addEventListener('F5', (e) => {
+    //     e = e || window.event;
+    //     e.preventDefault();
+    //     return;
+     
+    // });
+    
        /** 
         Method for validating fields
-      */
+      */       
         const isValid = () => {
           let hasError = false;
           const copyErrors: ErrorType = { ...error };  
