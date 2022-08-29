@@ -90,16 +90,14 @@ const CustomerBasicInfo: React.FC = () => {
         name="tel"
         id="tel"
         value={customer?.tel}
-        className={`${classes.formInputBox}  `}
+        className={`${classes.formInputBox}`}       
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => { 
-          setSuggestion("Only number and hyphen");
-          if (event.target.value.match(phoneRegex)) {
-            return handleFormChange(event);
+          if (!event.target.value.match(phoneRegex)) {
+            setSuggestion("Only number and hyphen");     
+            error.tel=""
           } else {
-            setError((prev) => ({
-              ...prev,
-              [error.tel]: "Invalid",
-            }));
+            setSuggestion(""); 
+            return handleFormChange(event);                     
           }
         }}
         style={{ width: "130%" }}

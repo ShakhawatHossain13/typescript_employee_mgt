@@ -4,6 +4,8 @@ import { TextField } from "@material-ui/core";
 import FormLabel from '@material-ui/core/FormLabel'; 
 import { Customer } from '../../../model';  
 import { CustomerContext } from "../../contexts/CustomerContext"; 
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { relative } from "node:path/win32";
 
 const useStyles = makeStyles({
     formInput: {            
@@ -14,16 +16,18 @@ const useStyles = makeStyles({
       gridTemplateColumns:"repeat(8, 1fr)",  
       border: "1px solid #000", 
       marginBottom: "15px",
+      position: "relative",
     }, 
     formInputLabel: {       
       fontFamily: "'Times New Roman', Times, serif", 
       padding: "6px 0", 
       textAlign: "left", 
       fontSize: "12px",
-      color: "#000",
+      color: "#000", 
+      width: "125px",
     }, 
     formInputLabelOne: {      
-      gridColumn: "1/2",  
+      gridColumn: "1",  
     }, 
     start:{
     // gridRowStart:"4",
@@ -31,11 +35,10 @@ const useStyles = makeStyles({
     formInputBox: {          
       fontFamily: "'Times New Roman', Times, serif",
       border: '1px solid #000',
-      marginLeft: "20px",
       borderRadius: '20px',
       padding: "0 5px",
       marginBottom: "12px",
-      height:"25px",
+      height:"25px",  
       fontSize: "12px",
       backgroundColor: "#fff",      
       "& .MuiFormHelperText-root": {         
@@ -50,6 +53,18 @@ const useStyles = makeStyles({
      formInputRequired:{
       color: "#ff0000",
       marginLeft: "2px"
+    },
+    formInputModalButton: {
+      border: '1px solid #000',
+      borderRadius: '50%',
+      padding: "0",
+      marginBottom: "5px",
+      height: "25px",
+      backgroundColor: "#fff",
+      width: "25px",
+      position: "absolute",
+      top: "37%",
+      right: "20px",    
     },
    }
   );   
@@ -78,9 +93,10 @@ const classes = useStyles();
                   onChange={handleFormChange}
                   helperText={error.blackInfo}
                   error={Boolean(error.blackInfo)}                          
-                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' , padding: '0' }}}            
+                  InputProps={{ disableUnderline: true, style: { fontSize: '12px' }}}            
               /> 
               <FormLabel  className={`${classes.formInputLabel} ${classes.formInputLabelOne} ${classes.start}`}>black information note</FormLabel>                       
+              <button type="button"   className={`${classes.formInputModalButton}`}><MoreHorizIcon /></button>
             </div>        
         </React.Fragment>
     )

@@ -6,10 +6,11 @@ type ErrorType = {
   };
   
 type CustomerBasicInfoProps ={ 
-    customer: Customer;
-    error: ErrorType;
-    setError: React.Dispatch<React.SetStateAction<ErrorType>>;
-    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  customer: Customer;
+  error: ErrorType; 
+  setCustomer: React.Dispatch<React.SetStateAction<Customer>>;
+  setError: React.Dispatch<React.SetStateAction<ErrorType>>;
+  handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
  

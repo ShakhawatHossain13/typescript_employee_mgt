@@ -42,8 +42,7 @@ const useStyles = makeStyles({
       gridColumn: "1/9",
       marginTop: "10px",
       padding: "10px",          
-      display: "grid",     
-     
+      display: "grid",          
     }
   }
 ); 
@@ -170,7 +169,7 @@ const formData: CustomerDataType = {
     remarks: "",    
     blackInfo: "",
     regionCode: "",
-    gender: "Male",
+    gender: "",
     age: "",
     customerFactor: "",
     clarificationCode: "",
@@ -200,7 +199,6 @@ const CustomerForm: React.FC=()=> {
   const[customer, setCustomer] = useState<Customer>(formData);
   const [error, setError] = React.useState<ErrorType>(initialError);     
   const classes = useStyles(); 
-
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setCustomer((prev) => {
@@ -270,7 +268,7 @@ const emailRegex=  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 
   return (  
     <React.Fragment>     
-    <CustomerContext.Provider value={{customer, error,  setError, handleFormChange}} >
+    <CustomerContext.Provider value={{customer, error, setError, setCustomer, handleFormChange}} >
       <form className={classes.container} >                    
         <div className={classes.wrapper1}>
               <CustomerHead />   
