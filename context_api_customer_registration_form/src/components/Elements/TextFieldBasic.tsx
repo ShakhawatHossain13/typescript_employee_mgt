@@ -103,15 +103,15 @@ type TextFieldBasicProps ={
     gridLabel:string;
     gridBox:string;
     RequiredFieldClass:string;
-    RequiredFieldText: string
+    requiredFieldText?: string
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
  
-const TextFieldBasic:React.FC<TextFieldBasicProps>=({name, id, text, value, error, inputLabelWidth, inputBoxWidth,gridLabel, gridBox, RequiredFieldClass, RequiredFieldText, handleFormChange})=>{   
+const TextFieldBasic:React.FC<TextFieldBasicProps>=({name, id, text, value, error, inputLabelWidth, inputBoxWidth,gridLabel, gridBox, RequiredFieldClass, requiredFieldText, handleFormChange})=>{   
    const classes = useStyles();
     return(
         <React.Fragment>     
-             <FormLabel style={{width: inputLabelWidth, gridColumn: gridLabel}} className={`${classes.formInputLabel} `}>{text}<span className={RequiredFieldClass}>{RequiredFieldText}</span></FormLabel>
+             <FormLabel style={{width: inputLabelWidth, gridColumn: gridLabel}} className={`${classes.formInputLabel} `}>{text}<span className={RequiredFieldClass}>{requiredFieldText}</span></FormLabel>
               <TextField
                   name={name}
                   id= {id}

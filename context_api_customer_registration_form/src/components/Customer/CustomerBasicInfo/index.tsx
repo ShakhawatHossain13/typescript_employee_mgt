@@ -100,7 +100,7 @@ const CustomerBasicInfo: React.FC = () => {
             return handleFormChange(event);                     
           }
         }}
-        style={{ width: "130%" }}
+        style={{ width: "180px" }}
         helperText={error?.tel || suggestion}
         error={Boolean(error.tel)}
         InputProps={{ disableUnderline: true, style: { fontSize: '12px' } }}
@@ -116,7 +116,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="1"
         gridBox=""
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
       <TextFieldBasic
@@ -130,7 +130,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="4"
         gridBox="5"
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
       <TextFieldBasic
@@ -144,7 +144,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="1"
         gridBox=""
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
       <TextFieldBasic
@@ -158,7 +158,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="6"
         gridBox="7"
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
       <FormLabel className={`${classes.formInputLabel} ${classes.formInputLabelOne}`}>T
@@ -196,7 +196,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="6"
         gridBox="7"
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
       <TextFieldBasic
@@ -210,7 +210,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="1"
         gridBox=""
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
       <TextFieldBasic
@@ -224,7 +224,7 @@ const CustomerBasicInfo: React.FC = () => {
         gridLabel="6"
         gridBox="7"
         RequiredFieldClass={classes.formInputRequired}
-        RequiredFieldText={"*"}
+        requiredFieldText={"*"}
         handleFormChange={handleFormChange}
       />
     </React.Fragment>

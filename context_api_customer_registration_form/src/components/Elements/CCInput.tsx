@@ -59,17 +59,17 @@ type CCInputProps ={
     inputLabelWidth: string,
     value: string;
     error: string;
-    RequiredFieldText: string
+    requiredFieldText?: string
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void; 
   };
  
-const CCInput:React.FC<CCInputProps>=({name, id, text, inputBoxWidth,inputLabelWidth, value, error, RequiredFieldText, handleFormChange})=>{   
+const CCInput:React.FC<CCInputProps>=({name, id, text, inputBoxWidth,inputLabelWidth, value, error, requiredFieldText, handleFormChange})=>{   
     const classes = useStyles();
     return(
         <React.Fragment>                
             <div className={classes.formInputWrapper}>           
                 <FormLabel style={{width: inputLabelWidth}} className={`${classes.formInputLabel}`}>{text} 
-                <span className={classes.formInputRequired}>{RequiredFieldText}</span>            
+                <span className={classes.formInputRequired}>{requiredFieldText}</span>            
                 </FormLabel>           
                 <TextField
                     name={name}

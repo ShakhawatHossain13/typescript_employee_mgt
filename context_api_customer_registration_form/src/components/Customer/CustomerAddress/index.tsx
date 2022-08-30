@@ -65,7 +65,7 @@ const CustomerAddress: React.FC = () => {
           inputLabelWidth="70px"
           value={customer?.address1}
           error={error?.address1}
-          RequiredFieldText={"*"}
+          requiredFieldText={"*"}
           handleFormChange={handleFormChange}
         />
         <CCInput
@@ -75,8 +75,7 @@ const CustomerAddress: React.FC = () => {
           inputBoxWidth="40%"
           inputLabelWidth="70px"
           value={customer?.address2}
-          error={error?.address2}
-          RequiredFieldText={""}
+          error={error?.address2}      
           handleFormChange={handleFormChange}
         />
         <CCInput
@@ -87,7 +86,6 @@ const CustomerAddress: React.FC = () => {
           inputLabelWidth="70px"
           value={customer?.address3}
           error={error?.address3}
-          RequiredFieldText={""}
           handleFormChange={handleFormChange}
         />
         <CCInput
@@ -98,7 +96,6 @@ const CustomerAddress: React.FC = () => {
           inputLabelWidth="70px"
           value={customer?.address4}
           error={error?.address4}
-          RequiredFieldText={""}
           handleFormChange={handleFormChange}
         />
 
@@ -110,7 +107,7 @@ const CustomerAddress: React.FC = () => {
           inputLabelWidth="70px"
           value={customer?.company}
           error={error?.company}
-          RequiredFieldText={"*"}
+          requiredFieldText={"*"}
           handleFormChange={handleFormChange}
         />
 
@@ -122,7 +119,7 @@ const CustomerAddress: React.FC = () => {
           inputLabelWidth="70px"
           value={customer?.department}
           error={error?.department}
-          RequiredFieldText={"*"}
+          requiredFieldText={"*"}
           handleFormChange={handleFormChange}
         />
       </div>
